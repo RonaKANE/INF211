@@ -40,6 +40,7 @@ public interface IServiceEntreprise
 	public boolean removeEntreprise(int id);
 	
 	//Envoyer message à un candidat pour une offre donnée
+	
 	//Lister messages reçus des candidats pour une offre de l'entreprise
 	//Lister messages envoyés à des candidats pour une offre de l'entreprise
 	

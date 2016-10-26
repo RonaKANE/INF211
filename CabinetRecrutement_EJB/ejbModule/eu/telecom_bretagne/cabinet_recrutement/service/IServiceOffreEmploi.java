@@ -34,8 +34,7 @@ public interface IServiceOffreEmploi {
 		
 		public boolean removeOffreEmploi(int id);
 		
-		//Lister messages reçus des entreprises pour une offre d'emploi
-		//Lister messages envoyés des entreprises pour une offre d'emploi
+
 
 
 }
