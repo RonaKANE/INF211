@@ -5,9 +5,11 @@ import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import eu.telecom_bretagne.cabinet_recrutement.data.model.Entreprise;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Offreemploi;
 
 /**
@@ -36,6 +38,21 @@ public class OffreEmploiDAO {
 	{
 		return entityManager.find(Offreemploi.class, id);
 	}
+	
+	//-----------------------------------------------------------------------------
+	public Offreemploi findByTitre(String titre){
+		String req = "select titre from Offreemploi e where e.titre=:titre";
+		Query q = entityManager.createQuery(req);
+		q.setParameter("titre", titre);
+		
+		try {
+		    Offreemploi res = (Offreemploi) q.getSingleResult();
+		    return res;
+		} catch (NoResultException ex) {
+		    return null;
+			}
+	}
+	
 	//----------------------------------------------------------------------------
   public List<Offreemploi> findAll()
 	{

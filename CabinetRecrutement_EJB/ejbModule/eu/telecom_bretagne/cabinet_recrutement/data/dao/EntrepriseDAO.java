@@ -9,6 +9,8 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import com.sun.tools.ws.wsdl.document.Message;
+
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Entreprise;
 
 /**
@@ -107,5 +109,5 @@ public class EntrepriseDAO
 	  
   }
   
-  
+	//----------------------------------------------------------------------------  
 }
