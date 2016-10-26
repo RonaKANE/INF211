@@ -14,6 +14,8 @@ import eu.telecom_bretagne.cabinet_recrutement.data.model.Secteuractivite;
 @Remote
 public interface IServiceCandidature {
 
+	// Vitale -----------------------------------------------------------------------------
+
 			public Candidature newCandidature(String nom, String prenom, Date date, String adressePostale, String mail, Date dateDepot, String CV, List <Secteuractivite> secteur, Niveauqualification niveau);
 			
 			public Candidature getCandidature(int id);
@@ -26,8 +28,9 @@ public interface IServiceCandidature {
 			
 			public List<Candidature>  candidatureByOffreList(int id);
 			
-			public List<Message> MessagesRecusList();
-			
-			public List<Message> MessagesEnvoyesList();
+	//Optionnel ---------------------------------------------------------------------------
+
+			//Lister messages reçus des entreprises pour une offre d'emploi
+			//Lister messages envoyés des entreprises pour une offre d'emploi
 	
 }

@@ -14,52 +14,28 @@ import eu.telecom_bretagne.cabinet_recrutement.data.model.Secteuractivite;
 @Remote
 public interface IServiceOffreEmploi {
 
-	//-----------------------------------------------------------------------------
-		/**
-		 * 
-		 * @param 
-		 * @return 
-		 */
-		//-----------------------------------------------------------------------------
-		public Offreemploi getOffreEmploi(int id);
-		/**
-		 * 
-		 * @return 
-		 */
-		public List<Offreemploi> listOffreemploi();
-		//-----------------------------------------------------------------------------
-		/**
-		 * 
-		 * @return
-		 */
-		public Offreemploi updateOffreemploi(int id, String titre, String descriptif, String profil, Niveauqualification niveau, List<Secteuractivite> secteur);
+	// Vitale -----------------------------------------------------------------------------
 		
-		//-----------------------------------------------------------------------------
-		/**
-		 * 
-		 * @return
-		 */
-		public boolean removeOffreEmploi(int id);
-		
-		//----------------------------------------------------------------------------
-		/**
-		 * 
-		 * @return
-		 */
 		public Offreemploi newOffreEmploi(String titre, String descriptif, String profil, Niveauqualification niveau, 
-				List <Secteuractivite> secteur, Date date);
+			List <Secteuractivite> secteur, Date date);
+
+		public Offreemploi getOffreEmploi(int id);
 		
-		//----------------------------------------------------------------------------
-		/**
-		 * 
-		 * @return
-		 */
+		public List<Offreemploi> listOffreemploi();
+		
 		public List<Offreemploi>  offreByEntrepriseList(int id);
 		
-		//----------------------------------------------------------------------------
-		/**
-		 * 
-		 * @return
-		 */
+		//A faire
 		public List<Message> offreByCandidatureList();
+
+	// Mineure ---------------------------------------------------------------------------
+		
+		public Offreemploi updateOffreemploi(int id, String titre, String descriptif, String profil, Niveauqualification niveau, List<Secteuractivite> secteur);
+		
+		public boolean removeOffreEmploi(int id);
+		
+		//Lister messages reçus des entreprises pour une offre d'emploi
+		//Lister messages envoyés des entreprises pour une offre d'emploi
+
+
 }

@@ -55,14 +55,14 @@ public class ServiceEntreprise implements IServiceEntreprise
 	@Override
 	public Entreprise updateEntreprise(int id, String name, String descriptive, String postalAddress){
 		
-		Entreprise e = entrepriseDAO.findById(id);
-		if(e != null){
-			e.setNom(name);
-			e.setAdressePostale(postalAddress);
-			e.setDescriptif(descriptive);
-			entrepriseDAO.update(e);
-			return e;
-		}
+			Entreprise e = entrepriseDAO.findById(id);
+			if(e != null){
+				e.setNom(name);
+				e.setAdressePostale(postalAddress);
+				e.setDescriptif(descriptive);
+				entrepriseDAO.update(e);
+				return e;
+			}
 		
 		return null;
 	}
@@ -83,18 +83,7 @@ public class ServiceEntreprise implements IServiceEntreprise
 	{
 		return entrepriseDAO.findAll();
 	}
-	
-	@Override
-	public List<Message> listReceivedMessages() {
 		
-		return null;
-	}
-	@Override
-	public List<Message> listSentMessages()
-	{
-		return null;
-	}
-	
 	// -----------------------------------------------------------------------------
 
 }

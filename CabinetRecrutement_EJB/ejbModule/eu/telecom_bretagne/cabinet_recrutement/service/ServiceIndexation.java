@@ -1,7 +1,15 @@
 package eu.telecom_bretagne.cabinet_recrutement.service;
 
+import java.util.List;
+
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+
+import eu.telecom_bretagne.cabinet_recrutement.data.dao.NiveauQualificationDAO;
+import eu.telecom_bretagne.cabinet_recrutement.data.dao.SecteuractiviteDAO;
+import eu.telecom_bretagne.cabinet_recrutement.data.model.Niveauqualification;
+import eu.telecom_bretagne.cabinet_recrutement.data.model.Secteuractivite;
 
 /**
  * Session Bean implementation class ServiceIndexationBean
@@ -10,11 +18,25 @@ import javax.ejb.Stateless;
 @LocalBean
 public class ServiceIndexation implements IServiceIndexation {
 
+	@EJB
+	private SecteuractiviteDAO secteuractiviteDAO;
+	private NiveauQualificationDAO niveauQualificationDAO;
+	
     /**
      * Default constructor. 
      */
     public ServiceIndexation() {
         // TODO Auto-generated constructor stub
     }
+
+	@Override
+	public List<Secteuractivite> secteursActiviteList() {
+		return secteuractiviteDAO.findAll();
+	}
+
+	@Override
+	public List<Niveauqualification> niveauQualificationList() {
+		return niveauQualificationDAO.findAll();
+	}
 
 }
