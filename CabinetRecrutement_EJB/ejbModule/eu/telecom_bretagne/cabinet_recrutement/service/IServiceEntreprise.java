@@ -15,17 +15,7 @@ import eu.telecom_bretagne.cabinet_recrutement.data.model.Entreprise;
 @Remote
 public interface IServiceEntreprise
 {
-	// Vitale -----------------------------------------------------------------------------
-
 	public Entreprise newEntreprise(String name, String descriptive, String postalAddress);
-	
-	/**
-	 * Obtention d'une entreprise suivant son id.
-	 * @param id id de l'entreprise.
-	 * @return l'instance de l'entreprise.
-	 */
-
-	public Entreprise getEntreprise(int id);
 	
 	/**
 	 * Obtention de la liste de toutes les entreprises référencées dans le système.
@@ -33,16 +23,22 @@ public interface IServiceEntreprise
 	 */
 	public List<Entreprise> listEntreprises();
 	
-	// Mineure --------------------------------------------------------------------------
+	/**
+	 * Obtention d'une entreprise suivant son id.
+	 * @param id id de l'entreprise.
+	 * @return l'instance de l'entreprise.
+	 */
+	public Entreprise getEntreprise(int id);
 	
+	//Lister offres d'emplois spécifiques à une entreprise : voir service OffreEmploi
+
 	public Entreprise updateEntreprise(int id, String name, String descriptive, String postalAddress);
 	
 	public boolean removeEntreprise(int id);
 	
-	//Envoyer message à un candidat pour une offre donnée
+	//Envoyer message
 	
-	//Lister messages reçus des candidats pour une offre de l'entreprise
-	//Lister messages envoyés à des candidats pour une offre de l'entreprise
+	//Lister messages reçus
 	
-	
+	//Lister messages envoyés
 }

@@ -7,11 +7,8 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
-import com.sun.tools.ws.wsdl.document.Message;
-
 import eu.telecom_bretagne.cabinet_recrutement.data.dao.CandidatureDAO;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Candidature;
-import eu.telecom_bretagne.cabinet_recrutement.data.model.Entreprise;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Niveauqualification;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Secteuractivite;
 
@@ -29,7 +26,6 @@ public class ServiceCandidature implements IServiceCandidature {
      * Default constructor. 
      */
     public ServiceCandidature() {
-        // TODO Auto-generated constructor stub
     }
 
 	@Override
@@ -52,6 +48,12 @@ public class ServiceCandidature implements IServiceCandidature {
 		
 		candidatureDAO.persist(c);
 		return c;
+			
+	}
+	
+	@Override
+	public List<Candidature> listCandidature() {
+		return candidatureDAO.findAll();
 	}
 
 	@Override
@@ -59,6 +61,8 @@ public class ServiceCandidature implements IServiceCandidature {
 		return candidatureDAO.findById(id);
 	}
 
+	//Lister offre emplois pour une candidature donnée
+	
 	@Override
 	public Candidature updateCandidature(int id, String nom, String prenom,
 			Date date, String adressePostale, String mail, String cv,
@@ -93,15 +97,10 @@ public class ServiceCandidature implements IServiceCandidature {
 		return false;
 	}
 
-	@Override
-	public List<Candidature> listCandidature() {
-		return candidatureDAO.findAll();
-	}
-
-	@Override
-	public List<Candidature> candidatureByOffreList(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	//Envoyer message
+	
+	//Lister messages reçus
+	
+	//Lister messages envoyés
 
 }

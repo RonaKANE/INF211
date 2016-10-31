@@ -14,27 +14,19 @@ import eu.telecom_bretagne.cabinet_recrutement.data.model.Secteuractivite;
 @Remote
 public interface IServiceOffreEmploi {
 
-	// Vitale -----------------------------------------------------------------------------
-		
 		public Offreemploi newOffreEmploi(String titre, String descriptif, String profil, Niveauqualification niveau, 
 			List <Secteuractivite> secteur, Date date);
-
-		public Offreemploi getOffreEmploi(int id);
-		
+	
 		public List<Offreemploi> listOffreemploi();
 		
+		public Offreemploi getOffreEmploi(int id);
+
+		public Offreemploi updateOffreemploi(int id, String titre, String descriptif, String profil, Niveauqualification niveau, List<Secteuractivite> secteur);
+
+		public boolean removeOffreEmploi(int id);
+
 		public List<Offreemploi>  offreByEntrepriseList(int id);
 		
-		//A faire
+		//TO DO
 		public List<Message> offreByCandidatureList();
-
-	// Mineure ---------------------------------------------------------------------------
-		
-		public Offreemploi updateOffreemploi(int id, String titre, String descriptif, String profil, Niveauqualification niveau, List<Secteuractivite> secteur);
-		
-		public boolean removeOffreEmploi(int id);
-		
-
-
-
 }

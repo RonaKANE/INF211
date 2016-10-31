@@ -21,16 +21,14 @@ import eu.telecom_bretagne.cabinet_recrutement.data.model.Entreprise;
 @LocalBean
 public class ServiceEntreprise implements IServiceEntreprise
 {
-	//-----------------------------------------------------------------------------
+
 	@EJB
 	private EntrepriseDAO entrepriseDAO;
-	//-----------------------------------------------------------------------------
+
 	/**
 	 * Default constructor.
 	 */
-	public ServiceEntreprise()
-	{
-		// TODO Auto-generated constructor stub
+	public ServiceEntreprise(){
 	}
 	
 	@Override
@@ -48,21 +46,26 @@ public class ServiceEntreprise implements IServiceEntreprise
 	}
 	
 	@Override
-	public Entreprise getEntreprise(int id)
-	{
+	public List<Entreprise> listEntreprises(){
+		return entrepriseDAO.findAll();
+	}	
+
+	@Override
+	public Entreprise getEntreprise(int id){
 		return entrepriseDAO.findById(id);
 	}
+	
 	@Override
 	public Entreprise updateEntreprise(int id, String name, String descriptive, String postalAddress){
 		
-			Entreprise e = entrepriseDAO.findById(id);
-			if(e != null){
-				e.setNom(name);
-				e.setAdressePostale(postalAddress);
-				e.setDescriptif(descriptive);
-				entrepriseDAO.update(e);
-				return e;
-			}
+		Entreprise e = entrepriseDAO.findById(id);
+		if(e != null){
+			e.setNom(name);
+			e.setAdressePostale(postalAddress);
+			e.setDescriptif(descriptive);
+			entrepriseDAO.update(e);
+			return e;
+		}
 		
 		return null;
 	}
@@ -78,12 +81,9 @@ public class ServiceEntreprise implements IServiceEntreprise
 		return false;
 	}
 	
-	@Override
-	public List<Entreprise> listEntreprises()
-	{
-		return entrepriseDAO.findAll();
-	}
-		
-	// -----------------------------------------------------------------------------
-
+	//Envoyer message
+	
+	//Lister messages reçus
+	
+	//Lister messages envoyés
 }

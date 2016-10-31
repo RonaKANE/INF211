@@ -9,8 +9,7 @@ import eu.telecom_bretagne.cabinet_recrutement.data.model.Secteuractivite;
 
 @Remote
 public interface IServiceIndexation {
-	
-	// Vitale -----------------------------------------------------------------------------
+
 	public List <Secteuractivite> secteursActiviteList();
 	
 	public List <Niveauqualification> niveauQualificationList();

@@ -31,7 +31,6 @@ public class ServiceOffreEmploi implements IServiceOffreEmploi {
      * Default constructor. 
      */
     public ServiceOffreEmploi() {
-        // TODO Auto-generated constructor stub
     }
 
 	@Override
@@ -55,15 +54,13 @@ public class ServiceOffreEmploi implements IServiceOffreEmploi {
 	}
 	
 	@Override
-	public Offreemploi getOffreEmploi(int id) {
-		
-		return OffreEmploiDAO.findById(id);
-	}
-
-	@Override
 	public List<Offreemploi> listOffreemploi() {
-
 		return OffreEmploiDAO.findAll();
+	}
+	
+	@Override
+	public Offreemploi getOffreEmploi(int id) {
+		return OffreEmploiDAO.findById(id);
 	}
 
 	@Override
@@ -97,13 +94,12 @@ public class ServiceOffreEmploi implements IServiceOffreEmploi {
 
 	@Override
 	public List<Offreemploi> offreByEntrepriseList(int id) {
-		
 		return OffreEmploiDAO.findByEntreprise(id);
 	}
 
 	@Override
 	public List<Message> offreByCandidatureList() {
-		// TODO Auto-generated method stub
+		// TODO TO DO TO DO TO DO
 		return null;
 	}
 

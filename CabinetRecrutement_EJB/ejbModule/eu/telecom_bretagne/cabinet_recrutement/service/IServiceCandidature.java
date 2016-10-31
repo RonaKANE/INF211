@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
-import com.sun.tools.ws.wsdl.document.Message;
-
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Candidature;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Niveauqualification;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Secteuractivite;
@@ -14,23 +12,23 @@ import eu.telecom_bretagne.cabinet_recrutement.data.model.Secteuractivite;
 @Remote
 public interface IServiceCandidature {
 
-	// Vitale -----------------------------------------------------------------------------
-
 			public Candidature newCandidature(String nom, String prenom, Date date, String adressePostale, String mail, Date dateDepot, String CV, List <Secteuractivite> secteur, Niveauqualification niveau);
 			
+			public List<Candidature> listCandidature();	
+			
 			public Candidature getCandidature(int id);
+			
+			//Lister offre emplois pour une candidature donnée
 	
 			public Candidature updateCandidature(int id, String nom, String prenom, Date date, String adressePostale, String mail, String CV, List <Secteuractivite> secteur, Niveauqualification niveau);
 			
 			public boolean removeCandidature(int id);
 			
-			public List<Candidature> listCandidature();
+			//Envoyer message
 			
-			public List<Candidature>  candidatureByOffreList(int id);
+			//Lister messages reçus
 			
-	//Optionnel ---------------------------------------------------------------------------
-
-			//Lister messages reçus des entreprises pour une offre d'emploi
-			//Lister messages envoyés des entreprises pour une offre d'emploi
+			//Lister messages envoyés
+			
 	
 }

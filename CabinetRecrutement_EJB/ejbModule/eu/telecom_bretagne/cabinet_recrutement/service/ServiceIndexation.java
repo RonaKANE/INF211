@@ -26,7 +26,6 @@ public class ServiceIndexation implements IServiceIndexation {
      * Default constructor. 
      */
     public ServiceIndexation() {
-        // TODO Auto-generated constructor stub
     }
 
 	@Override
@@ -38,5 +37,4 @@ public class ServiceIndexation implements IServiceIndexation {
 	public List<Niveauqualification> niveauQualificationList() {
 		return niveauQualificationDAO.findAll();
 	}
-
 }
