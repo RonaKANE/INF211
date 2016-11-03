@@ -14,8 +14,10 @@
     
     <ul>
       <li><a href="liste_entreprises.jsp">Liste des entreprises référencées</a></li>
+      <li><a href="liste_offresEmploi.jsp">Liste des offres d'emploi référencées</a></li>
+      <li><a href="liste_candidatures.jsp">Liste des candidatures référencées</a></li>
     </ul>
-  
+
   </body>
 
 </html>
