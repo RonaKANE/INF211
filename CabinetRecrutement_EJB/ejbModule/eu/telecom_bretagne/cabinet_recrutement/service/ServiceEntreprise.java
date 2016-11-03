@@ -6,8 +6,6 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
-import com.sun.tools.ws.wsdl.document.Message;
-
 import eu.telecom_bretagne.cabinet_recrutement.data.dao.EntrepriseDAO;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Entreprise;
 //import eu.telecom_bretagne.data.model.Service;
@@ -21,16 +19,14 @@ import eu.telecom_bretagne.cabinet_recrutement.data.model.Entreprise;
 @LocalBean
 public class ServiceEntreprise implements IServiceEntreprise
 {
-	//-----------------------------------------------------------------------------
+
 	@EJB
 	private EntrepriseDAO entrepriseDAO;
-	//-----------------------------------------------------------------------------
+
 	/**
 	 * Default constructor.
 	 */
-	public ServiceEntreprise()
-	{
-		// TODO Auto-generated constructor stub
+	public ServiceEntreprise(){
 	}
 	
 	@Override
@@ -48,10 +44,15 @@ public class ServiceEntreprise implements IServiceEntreprise
 	}
 	
 	@Override
-	public Entreprise getEntreprise(int id)
-	{
+	public List<Entreprise> listEntreprises(){
+		return entrepriseDAO.findAll();
+	}	
+
+	@Override
+	public Entreprise getEntreprise(int id){
 		return entrepriseDAO.findById(id);
 	}
+	
 	@Override
 	public Entreprise updateEntreprise(int id, String name, String descriptive, String postalAddress){
 		
@@ -78,23 +79,9 @@ public class ServiceEntreprise implements IServiceEntreprise
 		return false;
 	}
 	
-	@Override
-	public List<Entreprise> listEntreprises()
-	{
-		return entrepriseDAO.findAll();
-	}
+	//Envoyer message
 	
-	@Override
-	public List<Message> listReceivedMessages() {
-		
-		return null;
-	}
-	@Override
-	public List<Message> listSentMessages()
-	{
-		return null;
-	}
+	//Lister messages reçus
 	
-	// -----------------------------------------------------------------------------
-
+	//Lister messages envoyés
 }

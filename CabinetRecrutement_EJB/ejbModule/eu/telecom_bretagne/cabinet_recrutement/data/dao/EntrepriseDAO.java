@@ -43,7 +43,7 @@ public class EntrepriseDAO
 	
 	//-----------------------------------------------------------------------------
 	public Entreprise findByName(String name){
-    String req = "select nom from Entreprise e where e.nom=:nom";
+    String req = "select e.nom from Entreprise e where e.nom=:nom";
     Query q = entityManager.createQuery(req);
     q.setParameter("nom", name);
 
@@ -69,7 +69,7 @@ public class EntrepriseDAO
 	  try {
 		  if (entreprise == null)
 				new Exception("Entreprise is null");
-		  
+		  else
 			entityManager.persist(entreprise);
 		} catch (Exception e) {
 			System.err.println("Problem when saving ");
