@@ -10,6 +10,13 @@ import javax.ejb.Stateless;
 import com.sun.tools.ws.wsdl.document.Message;
 
 import eu.telecom_bretagne.cabinet_recrutement.data.dao.OffreEmploiDAO;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+import eu.telecom_bretagne.cabinet_recrutement.data.model.Entreprise;
+>>>>>>> b8ac9b61f1a85616050e1689b45cceeddc770cd3
+>>>>>>> eefb531271eda9f868ecaf377f1e3e0468f9941f
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Niveauqualification;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Offreemploi;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Secteuractivite;

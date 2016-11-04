@@ -20,7 +20,10 @@ public class ServiceIndexation implements IServiceIndexation {
 
 	@EJB
 	private SecteuractiviteDAO secteuractiviteDAO;
+<<<<<<< HEAD
 	@EJB
+=======
+>>>>>>> eefb531271eda9f868ecaf377f1e3e0468f9941f
 	private NiveauQualificationDAO niveauQualificationDAO;
 	
     /**

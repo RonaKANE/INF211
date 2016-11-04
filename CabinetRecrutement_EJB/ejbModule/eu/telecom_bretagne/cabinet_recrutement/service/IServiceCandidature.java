@@ -16,6 +16,8 @@ public interface IServiceCandidature {
 			
 			public List<Candidature> listCandidature();	
 			
+			public List<Candidature> listCandidature();	
+			
 			public Candidature getCandidature(int id);
 			
 			//Lister offre emplois pour une candidature donnée
