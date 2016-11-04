@@ -1,22 +1,16 @@
 package eu.telecom_bretagne.cabinet_recrutement.service;
 
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
-import com.sun.tools.ws.wsdl.document.Message;
-
+import eu.telecom_bretagne.cabinet_recrutement.data.dao.CandidatureDAO;
 import eu.telecom_bretagne.cabinet_recrutement.data.dao.OffreEmploiDAO;
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-import eu.telecom_bretagne.cabinet_recrutement.data.model.Entreprise;
->>>>>>> b8ac9b61f1a85616050e1689b45cceeddc770cd3
->>>>>>> eefb531271eda9f868ecaf377f1e3e0468f9941f
+import eu.telecom_bretagne.cabinet_recrutement.data.model.Candidature;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Niveauqualification;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Offreemploi;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Secteuractivite;
@@ -28,10 +22,11 @@ import eu.telecom_bretagne.cabinet_recrutement.data.model.Secteuractivite;
 @LocalBean
 public class ServiceOffreEmploi implements IServiceOffreEmploi {
 
-	//-----------------------------------------------------------------------------
 	@EJB
-	private OffreEmploiDAO OffreEmploiDAO;
-	//-----------------------------------------------------------------------------
+	private OffreEmploiDAO offreEmploiDAO;
+	
+	@EJB
+	private CandidatureDAO candidatureDAO;
 	
     /**
      * Default constructor. 
@@ -43,7 +38,7 @@ public class ServiceOffreEmploi implements IServiceOffreEmploi {
 	public Offreemploi newOffreEmploi(String titre, String descriptif, String profil, Niveauqualification niveau, 
 			List <Secteuractivite> secteur, Date datedepot){
 		
-		if (OffreEmploiDAO.findByTitre(titre) == null){
+		if (offreEmploiDAO.findByTitre(titre) == null){
 			Offreemploi e = new Offreemploi() ;
 			
 			e.setTitre(titre);
@@ -53,7 +48,7 @@ public class ServiceOffreEmploi implements IServiceOffreEmploi {
 			e.setSecteuractivites(secteur);	
 			e.setDatedepot(datedepot);
 
-			OffreEmploiDAO.persist(e);
+			offreEmploiDAO.persist(e);
 			return e;
 		}
 		return null;
@@ -61,26 +56,26 @@ public class ServiceOffreEmploi implements IServiceOffreEmploi {
 	
 	@Override
 	public List<Offreemploi> listOffreemploi() {
-		return OffreEmploiDAO.findAll();
+		return offreEmploiDAO.findAll();
 	}
 	
 	@Override
 	public Offreemploi getOffreEmploi(int id) {
-		return OffreEmploiDAO.findById(id);
+		return offreEmploiDAO.findById(id);
 	}
 
 	@Override
 	public Offreemploi updateOffreemploi(int id, String titre,
 			String descriptif, String profil, Niveauqualification niveau, List<Secteuractivite> secteur) {
 		
-		Offreemploi e = OffreEmploiDAO.findById(id);
+		Offreemploi e = offreEmploiDAO.findById(id);
 		if(e != null){
 			e.setTitre(titre);
 			e.setDescriptionmission(descriptif);
 			e.setProfilrecherche(profil);
 			e.setNiveauqualification(niveau);
 			e.setSecteuractivites(secteur);	
-			OffreEmploiDAO.update(e);
+			offreEmploiDAO.update(e);
 			
 			return e;
 		}
@@ -90,22 +85,38 @@ public class ServiceOffreEmploi implements IServiceOffreEmploi {
 
 	@Override
 	public boolean removeOffreEmploi(int id) {
-		Offreemploi e = OffreEmploiDAO.findById(id);
+		Offreemploi e = offreEmploiDAO.findById(id);
 		if (e!=null){
-			OffreEmploiDAO.remove(e);
+			offreEmploiDAO.remove(e);
 			return true;
 		}
 		return false;
 	}
 
 	@Override
-	public List<Offreemploi> offreByEntrepriseList(int id) {
-		return OffreEmploiDAO.findByEntreprise(id);
+	public List<Offreemploi> offresByEntreprise(int id) {
+		return offreEmploiDAO.findByEntreprise(id);
 	}
 
 	@Override
-	public List<Message> offreByCandidatureList() {
-		// TODO TO DO TO DO TO DO
+	public List<Offreemploi> offresByCandidature(int id) {
+			
+		Candidature candidature = new Candidature();
+		candidature = candidatureDAO.findById(id);
+		
+		if (candidature != null) {
+			Niveauqualification niveau = candidature.getNiveauqualification();
+			List <Secteuractivite> secteursList = candidature.getSecteuractivites();
+			
+			List <Offreemploi> oeList = new LinkedList<Offreemploi>();
+			for (Secteuractivite s : secteursList){
+				List <Offreemploi> l= offreEmploiDAO.findBySecteurActiviteAndNiveauQualification(s.getId(), niveau.getId());
+				if (l != null)
+					oeList.addAll(l);
+			}
+			return oeList;
+		}
+		
 		return null;
 	}
 

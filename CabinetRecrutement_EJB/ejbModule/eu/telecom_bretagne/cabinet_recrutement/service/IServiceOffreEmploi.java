@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
-import com.sun.tools.ws.wsdl.document.Message;
-
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Niveauqualification;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Offreemploi;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Secteuractivite;
@@ -25,8 +23,7 @@ public interface IServiceOffreEmploi {
 
 		public boolean removeOffreEmploi(int id);
 
-		public List<Offreemploi>  offreByEntrepriseList(int id);
-		
-		//TO DO
-		public List<Message> offreByCandidatureList();
+		public List<Offreemploi>  offresByEntreprise(int id);
+
+		public List<Offreemploi> offresByCandidature(int id);
 }
