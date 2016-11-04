@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import static javax.persistence.FetchType.EAGER;
 
 
 /**
@@ -46,7 +47,7 @@ public class Offreemploi implements Serializable {
 	private Niveauqualification niveauqualification;
 
 	//bi-directional many-to-many association to Secteuractivite
-	@ManyToMany(mappedBy="offreemplois")
+	@ManyToMany(mappedBy="offreemplois", fetch = EAGER)
 	private List<Secteuractivite> secteuractivites;
 
 	public Offreemploi() {
