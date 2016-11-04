@@ -106,25 +106,38 @@ insert into Entreprise (nom, descriptif, adresse_postale)   values ('Orange','L 
 insert into Entreprise (nom, descriptif, adresse_postale)   values ('Maroc Télécom','Beaucoup d avantages et moins de casse tête','Agadir');
 insert into Entreprise (nom, descriptif, adresse_postale)   values ('Chine Télécom','Des arnaqueurs','Pékin');
 insert into Entreprise (nom, descriptif, adresse_postale)   values ('Senegal Télécom','L afrique quoi !!!!! ','Dakar');
-insert into SecteurActivite (intitule)   values ('Télécom');
-insert into SecteurActivite (intitule)   values ('Réseau');
+
+insert into SecteurActivite (intitule)   values ('Achats/Logistique');
+insert into SecteurActivite (intitule)   values ('Assistanat/Secrétariat');
+insert into SecteurActivite (intitule)   values ('Agriculture');
+insert into SecteurActivite (intitule)   values ('Agroalimentaire');
+insert into SecteurActivite (intitule)   values ('Assurance');
+insert into SecteurActivite (intitule)   values ('Audit/Conseil/Expertises');
+insert into SecteurActivite (intitule)   values ('BTP/Immobilier');
+insert into SecteurActivite (intitule)   values ('Commercial');
+insert into SecteurActivite (intitule)   values ('Communication/Art/Média/Mode');
+insert into SecteurActivite (intitule)   values ('Comptabilité');
+insert into SecteurActivite (intitule)   values ('Direction Générale/Executive');
+insert into SecteurActivite (intitule)   values ('Distribution/Commerce');
+insert into SecteurActivite (intitule)   values ('Electronique/Microélectronique');
+insert into SecteurActivite (intitule)   values ('Environnement');
+insert into SecteurActivite (intitule)   values ('Finance/Banque');
+insert into SecteurActivite (intitule)   values ('Formation/Enseignement');
+insert into SecteurActivite (intitule)   values ('Hôtellerie/Restauration/Tourisme');
+insert into SecteurActivite (intitule)   values ('Industrie/Ingénierie/Production');
 insert into SecteurActivite (intitule)   values ('Informatique');
-insert into SecteurActivite (intitule)   values ('Sécurité');
-insert into SecteurActivite (intitule)   values ('Santé');
-insert into SecteurActivite (intitule)   values ('Aide à la personne');
+insert into SecteurActivite (intitule)   values ('Juridique/Fiscal/Droit');
+insert into SecteurActivite (intitule)   values ('Marketing');
+insert into SecteurActivite (intitule)   values ('Public/Parapublic');
 insert into SecteurActivite (intitule)   values ('Ressources Humaines');
-insert into SecteurActivite (intitule)   values ('Traitement de signal');
-insert into SecteurActivite (intitule)   values ('Enseignement');
-insert into NiveauQualification (intitule)   values ('BTS');
-insert into NiveauQualification (intitule)   values ('DUT');
-insert into NiveauQualification (intitule)   values ('Bac +1');
-insert into NiveauQualification (intitule)   values ('Bac +2');
+insert into SecteurActivite (intitule)   values ('Santé/Social/Biologie/Humanitaire');
+insert into SecteurActivite (intitule)   values ('Télécom/Réseaux');
+
+insert into NiveauQualification (intitule)   values ('CAP/BEP');
+insert into NiveauQualification (intitule)   values ('Bac');
 insert into NiveauQualification (intitule)   values ('Bac +3');
-insert into NiveauQualification (intitule)   values ('Bac +4');
 insert into NiveauQualification (intitule)   values ('Bac +5');
-insert into NiveauQualification (intitule)   values ('Bac +6');
-insert into NiveauQualification (intitule)   values ('Bac +7');
-insert into NiveauQualification (intitule)   values ('Bac +8');
+insert into NiveauQualification (intitule)   values ('Doctorat');
 
 insert into OffreEmploi (titre, descriptionMission, profilRecherche, dateDepot, id_Ent_fk, id_Niv_fk) values ('Dictateur', 'Diriger le peuple', 'Africain', '10-10-2016', 1, 1);
 insert into OffreEmploi (titre, descriptionMission, profilRecherche, dateDepot, id_Ent_fk, id_Niv_fk) values ('Acteur X', 'Devenir celebre en 5mn', '20cm minimum', '09-09-2016', 1, 2);
@@ -139,18 +152,32 @@ insert into OffreEmploi (titre, descriptionMission, profilRecherche, dateDepot, 
 insert into OffreEmploi (titre, descriptionMission, profilRecherche, dateDepot, id_Ent_fk, id_Niv_fk) values ('Chomeur', 'Dormir toute la journée', 'Etudiant de Télécom Bretagne', '06-06-2016', 3, 3);
 -----
 
-insert into SecteurEmploi (id_SecActi_fk, id_Offre_fk) values (1, 1);
-insert into SecteurEmploi (id_SecActi_fk, id_Offre_fk) values (1, 2);
-insert into SecteurEmploi (id_SecActi_fk, id_Offre_fk) values (1, 3);
+insert into SecteurEmploi (id_Offre_fk, id_SecActi_fk) values (1, 11);
+insert into SecteurEmploi (id_Offre_fk, id_SecActi_fk) values (1, 22);
 
-insert into SecteurEmploi (id_SecActi_fk, id_Offre_fk) values (2, 1);
-insert into SecteurEmploi (id_SecActi_fk, id_Offre_fk) values (2, 2);
-insert into SecteurEmploi (id_SecActi_fk, id_Offre_fk) values (2, 3);
+insert into SecteurEmploi (id_Offre_fk, id_SecActi_fk) values (2, 8);
+insert into SecteurEmploi (id_Offre_fk, id_SecActi_fk) values (2, 9);
 
-insert into SecteurEmploi (id_SecActi_fk, id_Offre_fk) values (3, 1);
-insert into SecteurEmploi (id_SecActi_fk, id_Offre_fk) values (3, 2);
-insert into SecteurEmploi (id_SecActi_fk, id_Offre_fk) values (3, 3);
+insert into SecteurEmploi (id_Offre_fk, id_SecActi_fk) values (3, 18);
+insert into SecteurEmploi (id_Offre_fk, id_SecActi_fk) values (3, 19);
 
+insert into SecteurEmploi (id_Offre_fk, id_SecActi_fk) values (4, 22);
+insert into SecteurEmploi (id_Offre_fk, id_SecActi_fk) values (4, 13);
+
+insert into SecteurEmploi (id_Offre_fk, id_SecActi_fk) values (5, 15);
+insert into SecteurEmploi (id_Offre_fk, id_SecActi_fk) values (5, 23);
+
+insert into SecteurEmploi (id_Offre_fk, id_SecActi_fk) values (6, 10);
+insert into SecteurEmploi (id_Offre_fk, id_SecActi_fk) values (6, 5);
+
+insert into SecteurEmploi (id_Offre_fk, id_SecActi_fk) values (7, 24);
+insert into SecteurEmploi (id_Offre_fk, id_SecActi_fk) values (7, 17);
+
+insert into SecteurEmploi (id_Offre_fk, id_SecActi_fk) values (8, 7);
+insert into SecteurEmploi (id_Offre_fk, id_SecActi_fk) values (8, 3);
+
+insert into SecteurEmploi (id_Offre_fk, id_SecActi_fk) values (9, 2);
+insert into SecteurEmploi (id_Offre_fk, id_SecActi_fk) values (9, 25);
 -----
 
 insert into Candidature (nom, prenom, dateNaissance, adresse_postale, adresseEmail, CV, dateDepot, id_Niv_fk) values ('CHAO','Lim Kevin', '29-04-1994', 'mon adresse', 'limkevin.chao@gmail.com', 'mon CV', '2016-10-11', 1);

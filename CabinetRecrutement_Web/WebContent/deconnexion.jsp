@@ -3,5 +3,5 @@
 
 <%
   session.invalidate();
-  response.sendRedirect("menu.jsp");
+  response.sendRedirect("template.jsp");
 %>

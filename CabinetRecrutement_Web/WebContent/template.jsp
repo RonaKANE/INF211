@@ -22,6 +22,7 @@
 	
 	  <div id="menu">
       <jsp:include page="menu.jsp" />
+      
 	  </div>
 	
 	  <div id="content">

@@ -37,7 +37,7 @@
 		    %>
 		    <tr>
 		     <td>ENT_<%=entreprise.getId()%></td>
-		     <td><a href="infos_entreprise.jsp?id=<%=entreprise.getId()%>"><%=entreprise.getNom()%></a></td>
+		     <td><a href="template.jsp?action=infos_entreprise&id=<%=entreprise.getId()%>"><%=entreprise.getNom()%></a></td>
 		     <td><%=entreprise.getDescriptif()%></td>
 		     <td><%=entreprise.getAdressePostale()%></td>
 		    </tr>
@@ -46,7 +46,7 @@
 		  %>
 		</table>
 
-    <a href="connexion.jsp">Retour au menu</a>
+    <a href="template.jsp">Retour au menu</a>
 
   </body>
   

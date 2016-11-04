@@ -6,6 +6,7 @@
 <%@page import="eu.telecom_bretagne.cabinet_recrutement.front.utils.ServicesLocator,
                 eu.telecom_bretagne.cabinet_recrutement.service.IServiceCandidature,
                 eu.telecom_bretagne.cabinet_recrutement.data.model.Candidature,
+                eu.telecom_bretagne.cabinet_recrutement.data.model.Secteuractivite,
                 java.util.List"%>
 <%
   // Récupération du service (bean session)
@@ -47,14 +48,19 @@
 
 		<tr>
 			     <td>CAND_<%=c.getId()%> </td>
-			     <td><a href="infos_candidature.jsp?id=<%=c.getId()%>"><%=c.getNom()%></a></td>
+			     <td><a href="template.jsp?action=infos_candidature&id=<%=c.getId()%>"><%=c.getNom()%></a></td>
 			     <td><%=c.getPrenom()%></td>
 			     <td><%=c.getDatenaissance()%></td>
 			     <td><%=c.getAdressePostale()%></td>
 			     <td><%=c.getAdresseemail()%></td>
 			     <td><%=c.getCv()%></td>
-			     <td><%=c.getNiveauqualification()%></td>
-			     <td><%=c.getSecteuractivites()%></td>
+			     <td><%=c.getNiveauqualification().getIntitule()%></td>
+			     <td>
+			      <% for (Secteuractivite s : c.getSecteuractivites())
+		        { %>
+		          <%= s.getIntitule()%> <br>
+		          <%} %>
+			     </td>
 			     <td><%=c.getDatedepot()%></td>
 	    </tr>
 		    <%
@@ -62,7 +68,7 @@
 		  %>
 		</table>
 
-    <a href="index.jsp">Retour au menu</a>
+    <a href="template.jsp">Retour au menu</a>
 
 
 

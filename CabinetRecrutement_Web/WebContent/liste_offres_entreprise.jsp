@@ -1,17 +1,25 @@
+<%@page import="eu.telecom_bretagne.cabinet_recrutement.data.model.Niveauqualification"%>
 <%@page import="eu.telecom_bretagne.cabinet_recrutement.data.model.Offreemploi"%>
 <%@page import="eu.telecom_bretagne.cabinet_recrutement.service.IServiceOffreEmploi"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
 <%@page import="eu.telecom_bretagne.cabinet_recrutement.front.utils.ServicesLocator,
+				eu.telecom_bretagne.cabinet_recrutement.front.utils.Utils,
                 eu.telecom_bretagne.cabinet_recrutement.service.IServiceOffreEmploi,
                 eu.telecom_bretagne.cabinet_recrutement.data.model.Offreemploi,
+                eu.telecom_bretagne.cabinet_recrutement.data.model.Secteuractivite,
                 java.util.List"%>
 <%
-  // Récupération du service (bean session)
+	// Récupération du paramètre (id) passé par l'URL : http://localhost:8080/infos_entreprises.jsp?id=1
+	// Attention : la valeur récupérée, même numérique, est sous la forme d'une chaîne de caractères.
+	String idString = request.getParameter("id");
+	//Transformation de la chaine "idString" en un entier
+	int id = Integer.parseInt(idString);
+  	// Récupération du service (bean session)
 	IServiceOffreEmploi serviceOffreEmploi = (IServiceOffreEmploi) ServicesLocator.getInstance().getRemoteInterface("ServiceOffreEmploi");
-// Appel de la fonctionnalité désirée auprès du service
-	List<Offreemploi> offresEmploi = serviceOffreEmploi.listOffreemploi();
+	// Appel de la fonctionnalité désirée auprès du service
+	List<Offreemploi> offresEmploi = serviceOffreEmploi.offresByEntrepriseList(id);
 %>    
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -31,7 +39,6 @@
 		<tr>
 				  <th>Numéro</th>
 				  <th>Titre</th>
-				  <th>Entreprise</th>
 				  <th>Descriptif mission</th>
 				  <th>Profil recherché</th>
 				  <th>Niveau de qualification</th>
@@ -44,12 +51,16 @@
 		    %>
 			<tr>
 			     <td> <%=oe.getId()%> </td>
-			     <td><a href="infos_offreEmploi.jsp?id=<%=oe.getId()%>"><%=oe.getTitre()%></a></td>
-			     <td><%=oe.getEntreprise()%></td>
+			     <td><a href="template.jsp?action=infos_offre&id=<%=oe.getId()%>"><%=oe.getTitre()%></a></td>
 			     <td><%=oe.getDescriptionmission()%></td>
 			     <td><%=oe.getProfilrecherche()%></td>
-			     <td><%=oe.getNiveauqualification()%></td>
-			     <td><%=oe.getSecteuractivites()%></td>
+			     <td><%= oe.getNiveauqualification().getIntitule() %></td>
+			     <td>
+			     <% for (Secteuractivite s : oe.getSecteuractivites())
+		        { %>
+		          <%= s.getIntitule()%> <br>
+		          <%} %>
+			     </td>
 			     <td><%=oe.getDatedepot()%></td>
 		    </tr>
 		    <%
@@ -57,7 +68,7 @@
 		  %>
 		</table>
 
-    <a href="index.jsp">Retour au menu</a>
+    <a href="template.jsp">Retour au menu</a>
 
 
 

@@ -1,3 +1,4 @@
+<%@page import="eu.telecom_bretagne.cabinet_recrutement.data.model.Niveauqualification"%>
 <%@page import="eu.telecom_bretagne.cabinet_recrutement.data.model.Offreemploi"%>
 <%@page import="eu.telecom_bretagne.cabinet_recrutement.service.IServiceOffreEmploi"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -6,6 +7,7 @@
 <%@page import="eu.telecom_bretagne.cabinet_recrutement.front.utils.ServicesLocator,
                 eu.telecom_bretagne.cabinet_recrutement.service.IServiceOffreEmploi,
                 eu.telecom_bretagne.cabinet_recrutement.data.model.Offreemploi,
+                eu.telecom_bretagne.cabinet_recrutement.data.model.Secteuractivite,
                 java.util.List"%>
 <%
   // Récupération du service (bean session)
@@ -44,12 +46,17 @@
 		    %>
 			<tr>
 			     <td> <%=oe.getId()%> </td>
-			     <td><a href="infos_offreEmploi.jsp?id=<%=oe.getId()%>"><%=oe.getTitre()%></a></td>
-			     <td><%=oe.getEntreprise()%></td>
+			     <td><a href="template.jsp?action=infos_offre&id=<%=oe.getId()%>"><%=oe.getTitre()%></a></td>
+			     <td><%=oe.getEntreprise().getNom()%></td>
 			     <td><%=oe.getDescriptionmission()%></td>
 			     <td><%=oe.getProfilrecherche()%></td>
-			     <td><%=oe.getNiveauqualification()%></td>
-			     <td><%=oe.getSecteuractivites()%></td>
+			     <td>	<%= oe.getNiveauqualification().getIntitule() %></td>
+			     <td>
+				<% for (Secteuractivite s : oe.getSecteuractivites())
+		        { %>
+		          <%= s.getIntitule()%> <br>
+		          <%} %>
+				</td>
 			     <td><%=oe.getDatedepot()%></td>
 		    </tr>
 		    <%
@@ -57,7 +64,7 @@
 		  %>
 		</table>
 
-    <a href="index.jsp">Retour au menu</a>
+    <a href="template.jsp">Retour au menu</a>
 
 
 

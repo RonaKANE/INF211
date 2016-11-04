@@ -53,7 +53,7 @@
   		else
   		{
         session.setAttribute("utilisateur",entreprise);
-        response.sendRedirect("menu.jsp");
+        response.sendRedirect("template.jsp");
   		}
   	}
   	else if(identifiant.startsWith("CAND_"))
@@ -71,7 +71,7 @@
       else
       {
         session.setAttribute("utilisateur",candidature);
-        response.sendRedirect("menu.jsp");
+        response.sendRedirect("template.jsp");
       }
   	}
   }

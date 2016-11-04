@@ -33,7 +33,7 @@
 		    		  else // C'est à priori correct...
 		    		  {
 		    		  	// Transformation de la chaine "idString" en un entier
-		            int id = Integer.parseInt(idString);
+		            	int id = Integer.parseInt(idString);
 		    		  	// Récupération du service (bean session)
 		    		    IServiceEntreprise serviceEntreprise = (IServiceEntreprise) ServicesLocator.getInstance().getRemoteInterface("ServiceEntreprise");
 		    		  	// Appel de la fonctionnalité désirée auprès du service
@@ -71,7 +71,7 @@
 		      </tr>
 		    </table>
         
-        <a href="liste_entreprises.jsp">Retour à la liste des entreprises</a>
+        <a href="template.jsp?action=liste_entreprises">Retour à la liste des entreprises</a>
 
 		    <%
 		  }

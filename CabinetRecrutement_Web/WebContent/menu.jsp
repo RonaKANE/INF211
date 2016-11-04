@@ -60,14 +60,14 @@
         %>
         <h2>Menu entreprise</h2>
 	      <ul>
-          <li class="menu"><a href="template.jsp?action=maj_entreprise&id_entreprise=<%=e.getId()%>">Mettre à jour les informations de l'entreprise</a></li>
-          <li class="menu"><a href="template.jsp?action=nouvelle_offre">Nouvelle offre d'emploi</a></li>
-<%-- 	        <li class="menu"><a href="template.jsp?action=liste_offres&id_entreprise=<%=e.getId()%>">Liste de mes offres d'emploi</a> (<%=serviceOffreEmploi.listeDesOffresPourUneEntreprise(e.getId()).size()%>)</li> --%>
-<!--         </ul> -->
-        <ul>
-          <li style="list-style-image: url(images/effacement.png)" class="menu"><a href="template.jsp?action=efface_entreprise&id_entreprise=<%=e.getId()%>" onclick="return confirm('Êtes-vous sûr de vouloir retirer votre entreprise et toutes vos offres d\'emploi?\n\nAttention, cette opération n\'est pas réversible !\n\n');">Retirer mon entreprise et toutes mes offres d'emploi</a></li>
+<%--           <li class="menu"><a href="template.jsp?action=maj_entreprise&id_entreprise=<%=e.getId()%>">Mettre à jour les informations de l'entreprise</a></li> --%>
+<!--           <li class="menu"><a href="template.jsp?action=nouvelle_offre">Nouvelle offre d'emploi</a></li> -->
+	        <li class="menu"><a href="template.jsp?action=liste_offres_entreprise&id=<%=e.getId()%>">Liste de mes offres d'emploi</a></li>
         </ul>
-	      <hr/>
+<!--         <ul> -->
+<%-- 	           <li style="list-style-image: url(images/effacement.png)" class="menu"><a href="template.jsp?action=efface_entreprise&id_entreprise=<%=e.getId()%>" onclick="return confirm('Êtes-vous sûr de vouloir retirer votre entreprise et toutes vos offres d\'emploi?\n\nAttention, cette opération n\'est pas réversible !\n\n');">Retirer mon entreprise et toutes mes offres d'emploi</a></li> --%> 
+<!--         </ul> -->
+<!-- 	      <hr/> -->
 <!-- 	      <h2>Menu messages</h2> -->
 <!-- 	      <ul> -->
 <%-- 	        <li class="menu"><a href="template.jsp?action=liste_messages_candidature">Messages reçus (<%=serviceEntreprise.listeDesMessagesRecus(e.getId()).size()%>)</a></li> --%>
@@ -82,14 +82,14 @@
         Candidature c = (Candidature) utilisateur;
         %>
         <h2>Menu candidature</h2>
-<!--         <ul> -->
-<%--           <li class="menu"><a href="template.jsp?action=maj_candidature&id_candidature=<%=c.getId()%>">Mettre à jour les informations de la candidature</a></li> --%>
-<%-- 	        <li class="menu"><a href="template.jsp?action=liste_offres&id_candidature=<%=c.getId()%>">Lister les offres d'emploi qui correspondent à ma candidature</a> (<%=serviceOffreEmploi.listeDesOffresPourUneCandidature(c.getId()).size()%>)</li> --%>
-<!--         </ul> -->
         <ul>
-	        <li style="list-style-image: url(images/effacement.png)" class="menu"><a href="template.jsp?action=efface_candidature&id_candidature=<%=c.getId()%>" onclick="return confirm('Êtes-vous sûr de vouloir retirer votre candidature ?\n\nAttention, cette opération n\'est pas réversible !\n\n');">Retirer ma candidature</a></li>
+<%--           <li class="menu"><a href="template.jsp?action=maj_candidature&id_candidature=<%=c.getId()%>">Mettre à jour les informations de la candidature</a></li> --%>
+	        <li class="menu"><a href="template.jsp?action=liste_offres_candidature&id=<%=c.getId()%>">Lister les offres d'emploi qui correspondent à ma candidature</a></li>
         </ul>
-        <hr/>
+<!--         <ul> -->
+<%-- 	        <li style="list-style-image: url(images/effacement.png)" class="menu"><a href="template.jsp?action=efface_candidature&id_candidature=<%=c.getId()%>" onclick="return confirm('Êtes-vous sûr de vouloir retirer votre candidature ?\n\nAttention, cette opération n\'est pas réversible !\n\n');">Retirer ma candidature</a></li> --%>
+<!--         </ul> -->
+<!--         <hr/> -->
 <!--         <h2>Menu messages</h2> -->
 <!--         <ul> -->
 <%--           <li class="menu"><a href="template.jsp?action=liste_messages_offre_emploi">Messages reçus (<%=serviceCandidature.listeDesMessagesRecus(c.getId()).size()%>)</a></li> --%>
