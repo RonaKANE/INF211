@@ -3,11 +3,13 @@ package eu.telecom_bretagne.cabinet_recrutement.service;
 import java.util.Date;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
-import com.sun.tools.ws.wsdl.document.Message;
-
+import eu.telecom_bretagne.cabinet_recrutement.data.dao.CandidatureDAO;
+import eu.telecom_bretagne.cabinet_recrutement.data.dao.NiveauQualificationDAO;
+import eu.telecom_bretagne.cabinet_recrutement.data.dao.SecteuractiviteDAO;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Candidature;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Niveauqualification;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Secteuractivite;
@@ -19,63 +21,106 @@ import eu.telecom_bretagne.cabinet_recrutement.data.model.Secteuractivite;
 @LocalBean
 public class ServiceCandidature implements IServiceCandidature {
 
+	@EJB
+	private CandidatureDAO candidatureDAO;
+	@EJB 
+	private SecteuractiviteDAO secteurDAO;
+	@EJB
+	private NiveauQualificationDAO niveauDAO;
+	
     /**
      * Default constructor. 
      */
     public ServiceCandidature() {
-        // TODO Auto-generated constructor stub
     }
 
 	@Override
-	public Candidature newCandidature(String nom, String prenom, Date date,
-			String adressePostale, String mail, Date dateDepot, String CV,
-			List<Secteuractivite> secteur, Niveauqualification niveau) {
-		// TODO Auto-generated method stub
-		return null;
+	public Candidature newCandidature(String nom, String prenom, Date datenaissance,
+			String adressePostale, String mail, Date dateDepot, String cv,
+			int[] secteurs, int niveau) {
+
+		//Trouver comment être sur d'avoir une seul candidature 
+		Candidature c = new Candidature() ;
+		
+		c.setNom(nom);
+		c.setPrenom(prenom);
+		c.setDatenaissance(datenaissance);
+		c.setAdressePostale(adressePostale);
+		c.setAdresseemail(mail);
+		c.setDatedepot(dateDepot);
+		c.setCv(cv);
+		c.setSecteuractivites(findSecteurbyId(secteurs));
+		c.setNiveauqualification(findNiveaubyId(niveau));
+		
+		candidatureDAO.persist(c);
+		return c;
+			
+	}
+	
+	private List <Secteuractivite> findSecteurbyId (int [] ids) {
+		List <Secteuractivite> list = null;
+		for (int id : ids) {
+			list.add(secteurDAO.findById(id));
+	}
+	return list;
+		
+	}
+	
+	private Niveauqualification findNiveaubyId (int id) {
+		return niveauDAO.findById(id);
+
+	}
+	
+	@Override
+	public List<Candidature> listCandidature() {
+		return candidatureDAO.findAll();
 	}
 
 	@Override
 	public Candidature getCandidature(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return candidatureDAO.findById(id);
 	}
 
+	//Lister offre emplois pour une candidature donnée
+	
 	@Override
 	public Candidature updateCandidature(int id, String nom, String prenom,
-			Date date, String adressePostale, String mail, String CV,
-			List<Secteuractivite> secteur, Niveauqualification niveau) {
-		// TODO Auto-generated method stub
+			Date date, String adressePostale, String mail, String cv,
+			int[] secteurs, int niveau) {
+		
+		Candidature c = candidatureDAO.findById(id);
+		if(c != null){
+			
+			c.setNom(nom);
+			c.setPrenom(prenom);
+			c.setAdressePostale(adressePostale);
+			c.setAdresseemail(mail);
+			c.setCv(cv);
+			c.setSecteuractivites(findSecteurbyId(secteurs));
+			c.setNiveauqualification(findNiveaubyId(niveau));
+			
+			candidatureDAO.update(c);
+			return c;
+		}
+		
 		return null;
 	}
 
 	@Override
 	public boolean removeCandidature(int id) {
-		// TODO Auto-generated method stub
+		
+		Candidature c = candidatureDAO.findById(id);
+		if (c != null){
+			candidatureDAO.remove(c);
+			return true;
+		}
 		return false;
 	}
 
-	@Override
-	public List<Candidature> listCandidature() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Candidature> candidatureByOffreList(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Message> MessagesRecusList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Message> MessagesEnvoyesList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	//Envoyer message
+	
+	//Lister messages reçus
+	
+	//Lister messages envoyés
 
 }

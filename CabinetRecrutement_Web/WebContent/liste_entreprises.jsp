@@ -9,7 +9,7 @@
   // Récupération du service (bean session)
 	IServiceEntreprise serviceEntreprise = (IServiceEntreprise) ServicesLocator.getInstance().getRemoteInterface("ServiceEntreprise");
 // Appel de la fonctionnalité désirée auprès du service
-	List<Entreprise> entreprises = serviceEntreprise.listeDesEntreprises();
+	List<Entreprise> entreprises = serviceEntreprise.listEntreprises();
 %>
 
 <html>
@@ -28,6 +28,7 @@
 		  <tr>
 		    <th>Identifiant</th>
 		    <th>Nom</th>
+		    <th>Descriptif</th>
 		    <th>Adresse postale (ville)</th>
 		  </tr>
 		  <%
@@ -37,6 +38,7 @@
 		    <tr>
 		     <td>ENT_<%=entreprise.getId()%></td>
 		     <td><a href="infos_entreprise.jsp?id=<%=entreprise.getId()%>"><%=entreprise.getNom()%></a></td>
+		     <td><%=entreprise.getDescriptif()%></td>
 		     <td><%=entreprise.getAdressePostale()%></td>
 		    </tr>
 		    <%
@@ -44,7 +46,7 @@
 		  %>
 		</table>
 
-    <a href="index.jsp">Retour au menu</a>
+    <a href="connexion.jsp">Retour au menu</a>
 
   </body>
   

@@ -37,7 +37,7 @@
 		    		  	// Récupération du service (bean session)
 		    		    IServiceEntreprise serviceEntreprise = (IServiceEntreprise) ServicesLocator.getInstance().getRemoteInterface("ServiceEntreprise");
 		    		  	// Appel de la fonctionnalité désirée auprès du service
-		    		    Entreprise entreprise = serviceEntreprise.obtenirEntreprise(id);
+		    		    Entreprise entreprise = serviceEntreprise.getEntreprise(id);
 		    %>
 		    
 		    <!-- Affichage des information récupérées -->

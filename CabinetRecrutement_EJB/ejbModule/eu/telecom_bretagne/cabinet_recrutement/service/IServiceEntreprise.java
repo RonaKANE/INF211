@@ -15,53 +15,30 @@ import eu.telecom_bretagne.cabinet_recrutement.data.model.Entreprise;
 @Remote
 public interface IServiceEntreprise
 {
-	//-----------------------------------------------------------------------------
-	/**
-	 * Obtention d'une entreprise suivant son id.
-	 * @param id id de l'entreprise.
-	 * @return l'instance de l'entreprise.
-	 */
-	//-----------------------------------------------------------------------------
-	public Entreprise getEntreprise(int id);
+	public Entreprise newEntreprise(String name, String descriptive, String postalAddress);
+	
 	/**
 	 * Obtention de la liste de toutes les entreprises référencées dans le système.
 	 * @return la liste des candidatures dans une {@code List<Entreprise>}.
 	 */
 	public List<Entreprise> listEntreprises();
-	//-----------------------------------------------------------------------------
+	
 	/**
-	 * 
-	 * @return
+	 * Obtention d'une entreprise suivant son id.
+	 * @param id id de l'entreprise.
+	 * @return l'instance de l'entreprise.
 	 */
+	public Entreprise getEntreprise(int id);
+	
+	//Lister offres d'emplois spécifiques à une entreprise : voir service OffreEmploi
+
 	public Entreprise updateEntreprise(int id, String name, String descriptive, String postalAddress);
 	
-	//-----------------------------------------------------------------------------
-	/**
-	 * 
-	 * @return
-	 */
 	public boolean removeEntreprise(int id);
 	
-	//----------------------------------------------------------------------------
-	/**
-	 * 
-	 * @return
-	 */
-	public Entreprise newEntreprise(String name, String descriptive, String postalAddress);
+	//Envoyer message
 	
-	//----------------------------------------------------------------------------
-	/**
-	 * 
-	 * @return
-	 */
-	public List<Message> listReceivedMessages();
+	//Lister messages reçus
 	
-	//----------------------------------------------------------------------------
-	/**
-	 * 
-	 * @return
-	 */
-	public List<Message> listSentMessages();
-	
-	
+	//Lister messages envoyés
 }

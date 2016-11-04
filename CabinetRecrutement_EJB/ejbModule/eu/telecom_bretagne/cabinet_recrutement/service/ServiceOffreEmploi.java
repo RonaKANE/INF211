@@ -10,7 +10,6 @@ import javax.ejb.Stateless;
 import com.sun.tools.ws.wsdl.document.Message;
 
 import eu.telecom_bretagne.cabinet_recrutement.data.dao.OffreEmploiDAO;
-import eu.telecom_bretagne.cabinet_recrutement.data.model.Entreprise;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Niveauqualification;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Offreemploi;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Secteuractivite;
@@ -31,7 +30,6 @@ public class ServiceOffreEmploi implements IServiceOffreEmploi {
      * Default constructor. 
      */
     public ServiceOffreEmploi() {
-        // TODO Auto-generated constructor stub
     }
 
 	@Override
@@ -55,15 +53,13 @@ public class ServiceOffreEmploi implements IServiceOffreEmploi {
 	}
 	
 	@Override
-	public Offreemploi getOffreEmploi(int id) {
-		
-		return OffreEmploiDAO.findById(id);
-	}
-
-	@Override
 	public List<Offreemploi> listOffreemploi() {
-
 		return OffreEmploiDAO.findAll();
+	}
+	
+	@Override
+	public Offreemploi getOffreEmploi(int id) {
+		return OffreEmploiDAO.findById(id);
 	}
 
 	@Override
@@ -97,13 +93,12 @@ public class ServiceOffreEmploi implements IServiceOffreEmploi {
 
 	@Override
 	public List<Offreemploi> offreByEntrepriseList(int id) {
-		
 		return OffreEmploiDAO.findByEntreprise(id);
 	}
 
 	@Override
 	public List<Message> offreByCandidatureList() {
-		// TODO Auto-generated method stub
+		// TODO TO DO TO DO TO DO
 		return null;
 	}
 
