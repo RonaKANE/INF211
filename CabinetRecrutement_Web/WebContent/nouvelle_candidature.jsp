@@ -90,7 +90,7 @@ if(nom == null) // Pas de paramétre "nom" => affichage du formulaire
 								<tr>
 								
  								<% for (Secteuractivite sec : serviceIndexation.secteursActiviteList()) { 
- 									%><td><input name="niveau" value="<%=sec.getId() %>" type="radio"><%=sec.getIntitule() %><br><% 
+ 									%><td><input name="niveau" value="<%=sec.getId() %>" type="checkbox"><%=sec.getIntitule() %><br><% 
  								}
  								%> 
 
@@ -116,7 +116,7 @@ else {
  	if(nom.equals(""))
   	{
   		%>
-  		<p class="erreur">Impossible de référencer une entreprise sans saisir le nom</p>
+  		<p class="erreur">Impossible de référencer une candidature sans saisir le nom</p>
   		<%
   	}
  	else
