@@ -1,9 +1,12 @@
 package eu.telecom_bretagne.cabinet_recrutement.data.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.Date;
 import java.util.List;
+
 import static javax.persistence.FetchType.EAGER;
 
 
@@ -17,6 +20,8 @@ public class Candidature implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(name="candidature_id_seq", sequenceName="candidature_id_seq", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="candidature_id_seq")
 	private Integer id;
 
 	@Column(name="adresse_postale")

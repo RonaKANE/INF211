@@ -26,7 +26,7 @@
 
 <body>
 
-<h2>Liste des offres d'emploi référencées :</h2>
+<h2>Liste des Candidatures référencées :</h2>
 
 		<table id="affichage">
 		<tr>
