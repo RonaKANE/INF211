@@ -104,12 +104,9 @@
 	    }
 	    
 	    int[] secteurIds = intarray;
-	  
-      int[] secteur = 
-    		  request.getParameter("secteurs");
 
 	IServiceOffreEmploi serviceOffre = (IServiceOffreEmploi) ServicesLocator.getInstance().getRemoteInterface("ServiceOffreEmploi");
-	Offreemploi offre = serviceOffre.newOffreEmploi(titre, descriptif, profil, nivId, secteurIds, new Date() );
+ 	Offreemploi offre = serviceOffre.newOffreEmploi(titre, descriptif, profil, nivId, secteurIds, new Date() );
 
       %>
       <h2>Nouvelle entreprise référencée :</h2>

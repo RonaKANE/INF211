@@ -9,7 +9,9 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import eu.telecom_bretagne.cabinet_recrutement.data.dao.CandidatureDAO;
+import eu.telecom_bretagne.cabinet_recrutement.data.dao.NiveauQualificationDAO;
 import eu.telecom_bretagne.cabinet_recrutement.data.dao.OffreEmploiDAO;
+import eu.telecom_bretagne.cabinet_recrutement.data.dao.SecteuractiviteDAO;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Candidature;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Niveauqualification;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Offreemploi;
@@ -28,7 +30,12 @@ public class ServiceOffreEmploi implements IServiceOffreEmploi {
 	@EJB
 	private CandidatureDAO candidatureDAO;
 	
-	@
+	@EJB
+	private NiveauQualificationDAO niveauQualificationDAO;
+	
+	@EJB
+	private SecteuractiviteDAO secteuractiviteDAO;
+	
     /**
      * Default constructor. 
      */
@@ -45,9 +52,12 @@ public class ServiceOffreEmploi implements IServiceOffreEmploi {
 			e.setTitre(titre);
 			e.setDescriptionmission(descriptif);
 			e.setProfilrecherche(profil);
+			e.setNiveauqualification(niveauQualificationDAO.findById(nivId));
 			
-			e.setNiveauqualification(niveau);
-			e.setSecteuractivites(secteur);	
+			List <Secteuractivite> l = new LinkedList<Secteuractivite>();
+			for (int i = 0 ; i < sectIds.length ; i++)
+				l.add(secteuractiviteDAO.findById(sectIds[i]));
+			e.setSecteuractivites(l);	
 			e.setDatedepot(datedepot);
 
 			offreEmploiDAO.persist(e);

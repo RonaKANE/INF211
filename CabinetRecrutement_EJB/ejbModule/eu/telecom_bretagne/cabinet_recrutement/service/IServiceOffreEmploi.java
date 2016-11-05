@@ -5,9 +5,7 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
-import eu.telecom_bretagne.cabinet_recrutement.data.model.Niveauqualification;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Offreemploi;
-import eu.telecom_bretagne.cabinet_recrutement.data.model.Secteuractivite;
 
 @Remote
 public interface IServiceOffreEmploi {
