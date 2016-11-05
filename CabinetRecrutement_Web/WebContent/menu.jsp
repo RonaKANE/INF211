@@ -61,7 +61,7 @@
         <h2>Menu entreprise</h2>
 	      <ul>
 <%--           <li class="menu"><a href="template.jsp?action=maj_entreprise&id_entreprise=<%=e.getId()%>">Mettre à jour les informations de l'entreprise</a></li> --%>
-<!--           <li class="menu"><a href="template.jsp?action=nouvelle_offre">Nouvelle offre d'emploi</a></li> -->
+           <li class="menu"><a href="template.jsp?action=nouvelle_offre">Nouvelle offre d'emploi</a></li>
 	        <li class="menu"><a href="template.jsp?action=liste_offres_entreprise&id=<%=e.getId()%>">Liste de mes offres d'emploi</a></li>
         </ul>
 <!--         <ul> -->

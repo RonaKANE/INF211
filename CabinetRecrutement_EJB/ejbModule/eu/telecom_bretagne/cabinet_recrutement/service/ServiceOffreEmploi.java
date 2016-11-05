@@ -28,6 +28,7 @@ public class ServiceOffreEmploi implements IServiceOffreEmploi {
 	@EJB
 	private CandidatureDAO candidatureDAO;
 	
+	@
     /**
      * Default constructor. 
      */
@@ -35,8 +36,8 @@ public class ServiceOffreEmploi implements IServiceOffreEmploi {
     }
 
 	@Override
-	public Offreemploi newOffreEmploi(String titre, String descriptif, String profil, Niveauqualification niveau, 
-			List <Secteuractivite> secteur, Date datedepot){
+	public Offreemploi newOffreEmploi(String titre, String descriptif, String profil, int nivId, 
+			int[] sectIds, Date datedepot){
 		
 		if (offreEmploiDAO.findByTitre(titre) == null){
 			Offreemploi e = new Offreemploi() ;
@@ -44,6 +45,7 @@ public class ServiceOffreEmploi implements IServiceOffreEmploi {
 			e.setTitre(titre);
 			e.setDescriptionmission(descriptif);
 			e.setProfilrecherche(profil);
+			
 			e.setNiveauqualification(niveau);
 			e.setSecteuractivites(secteur);	
 			e.setDatedepot(datedepot);
@@ -62,35 +64,6 @@ public class ServiceOffreEmploi implements IServiceOffreEmploi {
 	@Override
 	public Offreemploi getOffreEmploi(int id) {
 		return offreEmploiDAO.findById(id);
-	}
-
-	@Override
-	public Offreemploi updateOffreemploi(int id, String titre,
-			String descriptif, String profil, Niveauqualification niveau, List<Secteuractivite> secteur) {
-		
-		Offreemploi e = offreEmploiDAO.findById(id);
-		if(e != null){
-			e.setTitre(titre);
-			e.setDescriptionmission(descriptif);
-			e.setProfilrecherche(profil);
-			e.setNiveauqualification(niveau);
-			e.setSecteuractivites(secteur);	
-			offreEmploiDAO.update(e);
-			
-			return e;
-		}
-		
-		return null;
-	}
-
-	@Override
-	public boolean removeOffreEmploi(int id) {
-		Offreemploi e = offreEmploiDAO.findById(id);
-		if (e!=null){
-			offreEmploiDAO.remove(e);
-			return true;
-		}
-		return false;
 	}
 
 	@Override

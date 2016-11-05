@@ -15,10 +15,10 @@ public interface IServiceCandidature {
 			public List<Candidature> listCandidature();	
 			
 			public Candidature getCandidature(int id);
-	
-			public Candidature updateCandidature(int id, String nom, String prenom, Date date, String adressePostale, String mail, String CV, int[] secteur, int niveau);
+
+			//Mettre à jour
 			
-			public boolean removeCandidature(int id);
+			//Supprimmer
 			
 			//Envoyer message
 			

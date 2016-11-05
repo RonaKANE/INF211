@@ -68,40 +68,6 @@ public class ServiceCandidature implements IServiceCandidature {
 		return candidatureDAO.findById(id);
 	}
 	
-	@Override
-	public Candidature updateCandidature(int id, String nom, String prenom,
-			Date date, String adressePostale, String mail, String cv,
-			int[] secteurs, int niveau) {
-		
-		Candidature c = candidatureDAO.findById(id);
-		if(c != null){
-			
-			c.setNom(nom);
-			c.setPrenom(prenom);
-			c.setAdressePostale(adressePostale);
-			c.setAdresseemail(mail);
-			c.setCv(cv);
-			c.setSecteuractivites(findSecteurbyId(secteurs));
-			c.setNiveauqualification(findNiveaubyId(niveau));
-			
-			candidatureDAO.update(c);
-			return c;
-		}
-		
-		return null;
-	}
-
-	@Override
-	public boolean removeCandidature(int id) {
-		
-		Candidature c = candidatureDAO.findById(id);
-		if (c != null){
-			candidatureDAO.remove(c);
-			return true;
-		}
-		return false;
-	}
-
 	private List <Secteuractivite> findSecteurbyId (int [] ids) {
 		List <Secteuractivite> list = new LinkedList <Secteuractivite>();
 		for (int id : ids) {
