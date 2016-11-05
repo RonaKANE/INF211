@@ -8,10 +8,12 @@
 	
 <%@page import="eu.telecom_bretagne.cabinet_recrutement.front.utils.ServicesLocator,
                 eu.telecom_bretagne.cabinet_recrutement.front.utils.Utils,
-                eu.telecom_bretagne.cabinet_recrutement.service.IServiceEntreprise,
+                eu.telecom_bretagne.cabinet_recrutement.service.IServiceIndexation,
                 eu.telecom_bretagne.cabinet_recrutement.data.model.Candidature,
-                java.util.Date;
-                "%>
+                eu.telecom_bretagne.cabinet_recrutement.data.model.Niveauqualification,
+                eu.telecom_bretagne.cabinet_recrutement.data.model.Secteuractivite,
+                java.util.Date"%>
+                
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,7 +21,8 @@
 <title>Cabinet de recrutement : Nouvelle candidature</title>
 </head>
 <%
-ServiceIndexation services = new ServiceIndexation();
+// Récupération du service (bean session)
+	IServiceIndexation serviceIndexation = (IServiceIndexation) ServicesLocator.getInstance().getRemoteInterface("ServiceIndexation");
 %>
 <%String nom = request.getParameter("nom");
 if(nom == null) // Pas de paramétre "nom" => affichage du formulaire
@@ -68,10 +71,10 @@ if(nom == null) // Pas de paramétre "nom" => affichage du formulaire
 						<table id="tab_interne">
 							<tbody>
 								<tr>
-								<% for (Niveauqualification niv : services.niveauQualificationList()) {
-									%><td><input name="niveau" value="<%=niv.getId() %>" type="radio"><%=niv.getIntitule() %><br><%
-								}
-								%>
+ 								<% for (Niveauqualification niv : serviceIndexation.niveauQualificationList()) { 
+ 									%><td><input name="niveau" value="<%=niv.getId() %>" type="radio"><%=niv.getIntitule() %><br><% 
+ 								}
+ 								%> 
 
 									</td>
 								</tr>
@@ -86,10 +89,10 @@ if(nom == null) // Pas de paramétre "nom" => affichage du formulaire
 							<tbody>
 								<tr>
 								
-								<% for (Secteuractivite sec : services.secteursActiviteList()) {
-									%><td><input name="niveau" value="<%=sec.getId() %>" type="radio"><%=sec.getIntitule() %><br><%
-								}
-								%>
+ 								<% for (Secteuractivite sec : serviceIndexation.secteursActiviteList()) { 
+ 									%><td><input name="niveau" value="<%=sec.getId() %>" type="radio"><%=sec.getIntitule() %><br><% 
+ 								}
+ 								%> 
 
 
 								</tr>
