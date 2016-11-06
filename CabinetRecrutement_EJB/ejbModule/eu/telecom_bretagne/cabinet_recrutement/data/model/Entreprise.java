@@ -23,8 +23,8 @@ public class Entreprise implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-@SequenceGenerator(name="entreprise_id_seq", sequenceName="entreprise_id_seq", allocationSize=1)
-@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="entreprise_id_seq")
+	@SequenceGenerator(name="entreprise_id_seq", sequenceName="entreprise_id_seq", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="entreprise_id_seq")
 	private Integer id;
 
 	@Column(name="adresse_postale")

@@ -9,10 +9,12 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import eu.telecom_bretagne.cabinet_recrutement.data.dao.CandidatureDAO;
+import eu.telecom_bretagne.cabinet_recrutement.data.dao.EntrepriseDAO;
 import eu.telecom_bretagne.cabinet_recrutement.data.dao.NiveauQualificationDAO;
 import eu.telecom_bretagne.cabinet_recrutement.data.dao.OffreEmploiDAO;
 import eu.telecom_bretagne.cabinet_recrutement.data.dao.SecteuractiviteDAO;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Candidature;
+import eu.telecom_bretagne.cabinet_recrutement.data.model.Entreprise;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Niveauqualification;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Offreemploi;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Secteuractivite;
@@ -26,6 +28,9 @@ public class ServiceOffreEmploi implements IServiceOffreEmploi {
 
 	@EJB
 	private OffreEmploiDAO offreEmploiDAO;
+	
+	@EJB 
+	private EntrepriseDAO entrepriseDAO;
 	
 	@EJB
 	private CandidatureDAO candidatureDAO;
@@ -43,21 +48,20 @@ public class ServiceOffreEmploi implements IServiceOffreEmploi {
     }
 
 	@Override
-	public Offreemploi newOffreEmploi(String titre, String descriptif, String profil, int nivId, 
+	public Offreemploi newOffreEmploi(int entId, String titre, String descriptif, String profil, int nivId, 
 			int[] sectIds, Date datedepot){
 		
 		if (offreEmploiDAO.findByTitre(titre) == null){
 			Offreemploi e = new Offreemploi() ;
 			
+			e.setEntreprise(findEntreprisebyId(entId));
 			e.setTitre(titre);
 			e.setDescriptionmission(descriptif);
 			e.setProfilrecherche(profil);
 			e.setNiveauqualification(niveauQualificationDAO.findById(nivId));
 			
-			List <Secteuractivite> l = new LinkedList<Secteuractivite>();
-			for (int i = 0 ; i < sectIds.length ; i++)
-				l.add(secteuractiviteDAO.findById(sectIds[i]));
-			e.setSecteuractivites(l);	
+			e.setSecteuractivites(findSecteurbyId(sectIds));
+			e.setNiveauqualification(findNiveaubyId(nivId));	
 			e.setDatedepot(datedepot);
 
 			offreEmploiDAO.persist(e);
@@ -101,6 +105,22 @@ public class ServiceOffreEmploi implements IServiceOffreEmploi {
 		}
 		
 		return null;
+	}
+	
+	private Entreprise findEntreprisebyId (int id) {
+		return entrepriseDAO.findById(id);
+	}
+	
+	private List <Secteuractivite> findSecteurbyId (int [] ids) {
+		List <Secteuractivite> list = new LinkedList <Secteuractivite>();
+		for (int id : ids) {
+			list.add(secteuractiviteDAO.findById(id));
+			}
+	return list;
+	}
+	
+	private Niveauqualification findNiveaubyId (int id) {
+		return niveauQualificationDAO.findById(id);
 	}
 
 }

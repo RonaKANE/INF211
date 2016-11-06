@@ -10,7 +10,7 @@ import eu.telecom_bretagne.cabinet_recrutement.data.model.Offreemploi;
 @Remote
 public interface IServiceOffreEmploi {
 
-		public Offreemploi newOffreEmploi(String titre, String descriptif, String profil, 
+		public Offreemploi newOffreEmploi(int entId, String titre, String descriptif, String profil, 
 				int nivId, int[] sectIds, Date date);
 	
 		public List<Offreemploi> listOffreemploi();

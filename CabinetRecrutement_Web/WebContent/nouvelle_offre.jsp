@@ -4,6 +4,7 @@
                 eu.telecom_bretagne.cabinet_recrutement.front.utils.Utils,
                 eu.telecom_bretagne.cabinet_recrutement.service.IServiceOffreEmploi,
                 eu.telecom_bretagne.cabinet_recrutement.service.IServiceIndexation,
+                eu.telecom_bretagne.cabinet_recrutement.data.model.Entreprise,
                 eu.telecom_bretagne.cabinet_recrutement.data.model.Niveauqualification,
                 eu.telecom_bretagne.cabinet_recrutement.data.model.Secteuractivite,
                 eu.telecom_bretagne.cabinet_recrutement.data.model.Offreemploi,
@@ -11,6 +12,19 @@
 <%
 // Récupération du service (bean session)
 	IServiceIndexation serviceIndexation = (IServiceIndexation) ServicesLocator.getInstance().getRemoteInterface("ServiceIndexation");
+%>
+
+<%!
+private int [] parseStringArrayToIntArray(String [] strings) {
+	int[] intarray = new int[strings.length];
+    int i=0;
+    for(String str:strings){
+        intarray[i] = Integer.parseInt(str.trim());//Exception in this line
+        i++;
+    }
+	    return intarray;
+	  
+}
 %>
 
 <%
@@ -93,42 +107,46 @@
       // Récupération des autres paramétres
       String descriptif = request.getParameter("descriptif_mission");
       String profil = request.getParameter("profil_recherche");
-      int nivId = Integer.parseInt(request.getParameter("niveau"));
-      
-      String[] strings = request.getParameterValues("secteurs");
- 	  int[] intarray = new int[strings.length];
-	    int i=0;
-	    for(String str:strings){
-	        intarray[i]=Integer.parseInt(str);//Exception in this line
-	        i++;
-	    }
-	    
-	    int[] secteurIds = intarray;
-
+      int nivId = Integer.parseInt(request.getParameter("niveau"));	    
+	  int[] secteurIds = parseStringArrayToIntArray(request.getParameterValues("secteurs"));
+	Entreprise e = (Entreprise) session.getAttribute("utilisateur");
 	IServiceOffreEmploi serviceOffre = (IServiceOffreEmploi) ServicesLocator.getInstance().getRemoteInterface("ServiceOffreEmploi");
- 	Offreemploi offre = serviceOffre.newOffreEmploi(titre, descriptif, profil, nivId, secteurIds, new Date() );
+ 	Offreemploi offre = serviceOffre.newOffreEmploi(e.getId(), titre, descriptif, profil, nivId, secteurIds, new Date() );
 
       %>
-      <h2>Nouvelle entreprise référencée :</h2>
+      <h2>Nouvelle offre référencée :</h2>
       
       <table id="affichage">
         <tr>
           <th style="width: 170px;">Numéro :</th>
           <td>
-<%--             ENT_<%=offre.getId()%> --%>
+             ENT_<%=offre.getId()%> 
           </td>
         </tr>
         <tr>
           <th>Titre :</th>
           <td>
-<%--             <%=offre.getTitre()%> --%>
+             <%=offre.getTitre()%> 
           </td>
         </tr>
         <tr>
           <th>Descriptif :</th>
           <td>
-<%--             <%=Utils.text2HTML(offre.getDescriptionmission())%> --%>
+             <%=Utils.text2HTML(offre.getDescriptionmission())%> 
           </td>
+        </tr>
+         <tr>
+          <th>Secteurs:</th>
+          <td>
+            <% for (Secteuractivite s : offre.getSecteuractivites())
+		        { %>
+		          <%= s.getIntitule()%> <br>
+		          <%} %>
+          </td>
+        </tr>
+            <tr>
+          <th>Niveau de qualification :</th>
+          <td><%= offre.getNiveauqualification().getIntitule() %></td>
         </tr>
       
       </table>

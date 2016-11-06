@@ -9,7 +9,6 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import eu.telecom_bretagne.cabinet_recrutement.data.model.Entreprise;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Offreemploi;
 
 /**
@@ -41,7 +40,7 @@ public class OffreEmploiDAO {
 	
 	//-----------------------------------------------------------------------------
 	public Offreemploi findByTitre(String titre){
-		String req = "select titre from Offreemploi e where e.titre=:titre";
+		String req = "select e from Offreemploi e where e.titre=:titre";
 		Query q = entityManager.createQuery(req);
 		q.setParameter("titre", titre);
 		

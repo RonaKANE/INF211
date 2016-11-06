@@ -1,10 +1,23 @@
 package eu.telecom_bretagne.cabinet_recrutement.data.model;
 
+import static javax.persistence.FetchType.EAGER;
+
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
-import static javax.persistence.FetchType.EAGER;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 /**
@@ -17,6 +30,8 @@ public class Offreemploi implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(name="offreemploi_id_seq", sequenceName="offreemploi_id_seq", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="offreemploi_id_seq")
 	private Integer id;
 
 	@Temporal(TemporalType.DATE)
