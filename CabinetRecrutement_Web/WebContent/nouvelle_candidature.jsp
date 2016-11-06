@@ -1,28 +1,51 @@
-
+<%@page import="java.lang.reflect.Array"%>
+<%@page import="com.sun.el.stream.Stream"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page
+	import="eu.telecom_bretagne.cabinet_recrutement.data.model.Secteuractivite"%>
+<%@page
+	import="eu.telecom_bretagne.cabinet_recrutement.data.model.Niveauqualification"%>
+<%@page
+	import="eu.telecom_bretagne.cabinet_recrutement.service.ServiceIndexation"%>
+<%@page
+	import="eu.telecom_bretagne.cabinet_recrutement.service.ServiceCandidature"%>
+<%@page
+	import="eu.telecom_bretagne.cabinet_recrutement.service.IServiceCandidature"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
-<%@page import="eu.telecom_bretagne.cabinet_recrutement.front.utils.ServicesLocator,
+
+<%@page
+	import="eu.telecom_bretagne.cabinet_recrutement.front.utils.ServicesLocator,
                 eu.telecom_bretagne.cabinet_recrutement.front.utils.Utils,
                 eu.telecom_bretagne.cabinet_recrutement.service.IServiceIndexation,
-                eu.telecom_bretagne.cabinet_recrutement.service.IServiceCandidature,
                 eu.telecom_bretagne.cabinet_recrutement.data.model.Candidature,
                 eu.telecom_bretagne.cabinet_recrutement.data.model.Niveauqualification,
                 eu.telecom_bretagne.cabinet_recrutement.data.model.Secteuractivite,
                 java.util.Date"%>
-        
-<%
-// Récupération du service (bean session)
-	IServiceIndexation serviceIndexation = (IServiceIndexation) ServicesLocator.getInstance().getRemoteInterface("ServiceIndexation");
-%>
-                
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Cabinet de recrutement : Nouvelle candidature</title>
 </head>
+<%!
+private int [] parseStringArrayToIntArray(String [] strings) {
+	int[] intarray = new int[strings.length];
+    int i=0;
+    for(String str:strings){
+        intarray[i] = Integer.parseInt(str.trim());//Exception in this line
+        i++;
+    }
+	    return intarray;
+	  
+}
+%>
 
+<%
+// Récupération du service (bean session)
+	IServiceIndexation serviceIndexation = (IServiceIndexation) ServicesLocator.getInstance().getRemoteInterface("ServiceIndexation");
+%>
 <%String nom = request.getParameter("nom");
 if(nom == null) // Pas de paramétre "nom" => affichage du formulaire
 {
@@ -70,12 +93,12 @@ if(nom == null) // Pas de paramétre "nom" => affichage du formulaire
 						<table id="tab_interne">
 							<tbody>
 								<tr>
- 								<% for (Niveauqualification niv : serviceIndexation.niveauQualificationList()) { 
- 									%><td><input name="niveau" value="<%=niv.getId() %>" type="radio"><%=niv.getIntitule() %><br><% 
+									<% for (Niveauqualification niv : serviceIndexation.niveauQualificationList()) { 
+ 									%><td><input name="niveau" value="<%=niv.getId() %>"
+										type="radio"><%=niv.getIntitule() %><br>
+										<% 
  								}
- 								%> 
-
-									</td>
+ 								%></td>
 								</tr>
 							</tbody>
 						</table>
@@ -87,15 +110,15 @@ if(nom == null) // Pas de paramétre "nom" => affichage du formulaire
 						<table id="tab_interne">
 							<tbody>
 								<tr>
-								
- 								<% for (Secteuractivite sec : serviceIndexation.secteursActiviteList()) { 
- 									%><td><input name="niveau" value="<%=sec.getId() %>" type="checkbox"><%=sec.getIntitule() %><br><% 
+
+									<% for (Secteuractivite sec : serviceIndexation.secteursActiviteList()) { 
+ 									%><td><input name="secteur" value="<%=sec.getId() %>"
+										type="checkbox"><%=sec.getIntitule() %><br>
+										<% 
  								}
- 								%> 
-
-
+ 								%>
 								</tr>
-								
+
 							</tbody>
 						</table>
 					</td>
@@ -107,31 +130,34 @@ if(nom == null) // Pas de paramétre "nom" => affichage du formulaire
 		</p>
 
 	</form>
-	
-	
+
+
 </body>
 <% }
 else {
  	if(nom.equals(""))
   	{
   		%>
-  		<p class="erreur">Impossible de référencer une candidature sans saisir le nom</p>
-  		<%
+<p class="erreur">Impossible de référencer une candidature sans
+	saisir le nom</p>
+<%
   	}
  	else
   	{
       // Récupération des autres paramétres
+      
+      SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
       String prenom     = request.getParameter("prenom");
-      String date  = request.getParameter("date_naissance");
+      Date date  = formatter.parse(request.getParameter("date_naissance"));
       String adressePostale = request.getParameter("adresse_postale");
 	  String mail = request.getParameter("adresse_email");
 	  String CV = request.getParameter("cv");
-	  String [] secteur = request.getParameterValues("secteur");
-	  String [] niveau = request.getParameterValues("niveau");
+	  int [] secteur = parseStringArrayToIntArray(request.getParameterValues("secteur"));
+	  int niveau = Integer.parseInt(request.getParameter("niveau"));
 	  
 	  
       IServiceCandidature serviceCandidature = (IServiceCandidature) ServicesLocator.getInstance().getRemoteInterface("ServiceCandidature");
-      //Candidature candidature = serviceCandidature.newCandidature(nom, prenom, date, adressePostale, mail, new Date(), CV, secteur, niveau);
+      Candidature candidature = serviceCandidature.newCandidature(nom, prenom, date, adressePostale, mail, new Date(), CV, secteur, niveau);
   	}
 
 }
