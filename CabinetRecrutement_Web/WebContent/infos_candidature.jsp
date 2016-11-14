@@ -44,7 +44,7 @@
 		    
 		    <!-- Affichage des information récupérées -->
 		    
-		    <h2>Infos Offre Emploi :</h2>
+		    <h2>Infos Candidature :</h2>
 
 		    <table id="affichage">
 		      <tr>

@@ -51,7 +51,7 @@
 		    %>
 			<tr>
 			     <td> <%=oe.getId()%> </td>
-			     <td><a href="template.jsp?action=infos_offre&id=<%=oe.getId()%>"><%=oe.getTitre()%></a></td>
+			     <td><a href="template.jsp?action=infos_offre_entreprise&id=<%=oe.getId()%>"><%=oe.getTitre()%></a></td>
 			     <td><%=oe.getDescriptionmission()%></td>
 			     <td><%=oe.getProfilrecherche()%></td>
 			     <td><%= oe.getNiveauqualification().getIntitule() %></td>

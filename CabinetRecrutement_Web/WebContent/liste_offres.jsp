@@ -1,19 +1,19 @@
-<%@page import="eu.telecom_bretagne.cabinet_recrutement.data.model.Niveauqualification"%>
-<%@page import="eu.telecom_bretagne.cabinet_recrutement.data.model.Offreemploi"%>
-<%@page import="eu.telecom_bretagne.cabinet_recrutement.service.IServiceOffreEmploi"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
 <%@page import="eu.telecom_bretagne.cabinet_recrutement.front.utils.ServicesLocator,
+				eu.telecom_bretagne.cabinet_recrutement.front.utils.Utils,
                 eu.telecom_bretagne.cabinet_recrutement.service.IServiceOffreEmploi,
                 eu.telecom_bretagne.cabinet_recrutement.data.model.Offreemploi,
+                eu.telecom_bretagne.cabinet_recrutement.data.model.Candidature,
                 eu.telecom_bretagne.cabinet_recrutement.data.model.Secteuractivite,
+                eu.telecom_bretagne.cabinet_recrutement.data.model.Niveauqualification,
                 java.util.List"%>
 <%
-  // Récupération du service (bean session)
+// Récupération du service (bean session)
 	IServiceOffreEmploi serviceOffreEmploi = (IServiceOffreEmploi) ServicesLocator.getInstance().getRemoteInterface("ServiceOffreEmploi");
 // Appel de la fonctionnalité désirée auprès du service
-	List<Offreemploi> offresEmploi = serviceOffreEmploi.listOffreemploi();
+	List <Offreemploi> offresEmploi = serviceOffreEmploi.listOffreemploi();
 %>    
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

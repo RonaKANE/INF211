@@ -10,9 +10,11 @@ import javax.ejb.Stateless;
 
 import eu.telecom_bretagne.cabinet_recrutement.data.dao.CandidatureDAO;
 import eu.telecom_bretagne.cabinet_recrutement.data.dao.NiveauQualificationDAO;
+import eu.telecom_bretagne.cabinet_recrutement.data.dao.OffreEmploiDAO;
 import eu.telecom_bretagne.cabinet_recrutement.data.dao.SecteuractiviteDAO;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Candidature;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Niveauqualification;
+import eu.telecom_bretagne.cabinet_recrutement.data.model.Offreemploi;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Secteuractivite;
 
 /**
@@ -28,6 +30,9 @@ public class ServiceCandidature implements IServiceCandidature {
 	private SecteuractiviteDAO secteurDAO;
 	@EJB
 	private NiveauQualificationDAO niveauDAO;
+	
+	@EJB
+	private OffreEmploiDAO offreEmploiDAO;
 	
     /**
      * Default constructor. 
@@ -79,6 +84,29 @@ public class ServiceCandidature implements IServiceCandidature {
 	private Niveauqualification findNiveaubyId (int id) {
 		return niveauDAO.findById(id);
 	}
+	
+	@Override
+	public List<Candidature> candidaturesByOffre(int id) {
+			
+		Offreemploi oe = new Offreemploi();
+		oe = offreEmploiDAO.findById(id);
+		
+		if (oe != null) {
+			Niveauqualification niveau = oe.getNiveauqualification();
+			List <Secteuractivite> secteursList = oe.getSecteuractivites();
+			
+			List <Candidature> cList = new LinkedList<Candidature>();
+			for (Secteuractivite s : secteursList){
+				List <Candidature> l= candidatureDAO.findBySecteurActiviteAndNiveauQualification(s.getId(), niveau.getId());
+				if (l != null)
+					cList.addAll(l);
+			}
+			return cList;
+		}
+		
+		return null;
+	}
+	
 	
 	//Envoyer message
 	

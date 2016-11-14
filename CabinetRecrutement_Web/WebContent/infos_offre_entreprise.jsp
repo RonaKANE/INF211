@@ -1,3 +1,4 @@
+<%@page import="eu.telecom_bretagne.cabinet_recrutement.data.model.Secteuractivite"%>
 <%@page import="eu.telecom_bretagne.cabinet_recrutement.service.IServiceEntreprise"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -5,7 +6,10 @@
 <%@page import="eu.telecom_bretagne.cabinet_recrutement.front.utils.ServicesLocator,
             eu.telecom_bretagne.cabinet_recrutement.front.utils.Utils,
             eu.telecom_bretagne.cabinet_recrutement.service.IServiceOffreEmploi,
-            eu.telecom_bretagne.cabinet_recrutement.data.model.Offreemploi"%>
+            eu.telecom_bretagne.cabinet_recrutement.service.IServiceCandidature,
+            eu.telecom_bretagne.cabinet_recrutement.data.model.Offreemploi,
+            eu.telecom_bretagne.cabinet_recrutement.data.model.Candidature,
+            java.util.List"%>
             
 <%
   // Récupération du paramètre (id) passé par l'URL : http://localhost:8080/infos_entreprises.jsp?id=1
@@ -39,6 +43,8 @@
 		    		    IServiceOffreEmploi serviceOffreEmploi = (IServiceOffreEmploi) ServicesLocator.getInstance().getRemoteInterface("ServiceOffreEmploi");
 		    		  	// Appel de la fonctionnalité désirée auprès du service
 		    		    Offreemploi oe = serviceOffreEmploi.getOffreEmploi(id);
+		    		  	
+
 		    %>
 		    
 		    <!-- Affichage des information récupérées -->
@@ -61,7 +67,7 @@
 		      <tr>
 		        <th>Entreprise :</th>
 		        <td>
-		          <%=oe.getEntreprise()%>
+		          <%=oe.getEntreprise().getNom()%>
 		        </td>
 		      </tr>
 		      <tr>
@@ -79,13 +85,17 @@
 		       <tr>
 		        <th>Niveau de qualification :</th>
 		        <td>
-		          <%=oe.getNiveauqualification()%>
+		          <%=oe.getNiveauqualification().getIntitule()%>
 		        </td>
 		      </tr>
 		       <tr>
 		        <th>Secteurs d'activité :</th>
-		        <td>
-		          <%=oe.getSecteuractivites()%>
+		         <td>
+		        <% for (Secteuractivite s : oe.getSecteuractivites())
+		        { %>
+		       
+		          <%= s.getIntitule()%> <br>
+		          <%} %>
 		        </td>
 		      </tr>
 		       <tr>
@@ -96,7 +106,58 @@
 		      </tr>
 		    </table>
         
-        <a href="liste_offresEmploi.jsp">Retour à la liste des offres d'emploi</a>
+        
+        <%
+  // Récupération du service (bean session)
+	IServiceCandidature serviceCandidature = (IServiceCandidature) ServicesLocator.getInstance().getRemoteInterface("ServiceCandidature");
+// Appel de la fonctionnalité désirée auprès du service
+	List<Candidature> candidatures = serviceCandidature.candidaturesByOffre(id);
+%>    
+    
+
+<h2>Liste des candidatures compatibles avec l'offre :</h2>
+
+		<table id="affichage">
+		<tr>
+				  <th>Identifiant</th>
+				  <th>Nom</th>
+				  <th>Prénom</th>
+				  <th>Date de naissance</th>
+				  <th>Adresse postale</th>
+				  <th>Adresse email</th>
+				  <th>CV</th>
+				  <th>Niveau de qualification</th>
+				  <th>Liste des secteurs d'activité</th>
+				  <th>Date de dépôt</th>
+		</tr>
+		  <%
+		  for(Candidature c : candidatures)
+		  {
+		    %>
+
+		<tr>
+			     <td>CAND_<%=c.getId()%> </td>
+			     <td><a href="template.jsp?action=infos_candidature&id=<%=c.getId()%>"><%=c.getNom()%></a></td>
+			     <td><%=c.getPrenom()%></td>
+			     <td><%=c.getDatenaissance()%></td>
+			     <td><%=c.getAdressePostale()%></td>
+			     <td><%=c.getAdresseemail()%></td>
+			     <td><%=c.getCv()%></td>
+			     <td><%=c.getNiveauqualification().getIntitule()%></td>
+			     <td>
+			      <% for (Secteuractivite s : c.getSecteuractivites())
+		        { %>
+		          <%= s.getIntitule()%> <br>
+		          <%} %>
+			     </td>
+			     <td><%=c.getDatedepot()%></td>
+	    </tr>
+		    <%
+		  }
+		  %>
+		</table>
+		
+        <a href="template.jsp?action=liste_offres">Retour à la liste des offres d'emploi</a>
 
 		    <%
 		  }

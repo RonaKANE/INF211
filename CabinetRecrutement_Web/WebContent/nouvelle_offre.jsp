@@ -41,19 +41,19 @@ private int [] parseStringArrayToIntArray(String [] strings) {
 	  	  <tbody><tr>
           <th style="width: 170px">Titre de l'offre :</th>
 	        <td>
-	          <input name="titre" size="20" maxlength="50" type="text">
+	          <input name="titre" size="20" maxlength="50" type="text" required>
 	        </td>
 	  	  </tr>
 	      <tr>
           <th>Descriptif de la mission :</th>
 	        <td>
-	          <textarea rows="7" cols="70" name="descriptif_mission"></textarea>
+	          <textarea rows="7" cols="70" name="descriptif_mission" required></textarea>
 	        </td>
 	      </tr>
         <tr>
           <th>Profil recherché :</th>
           <td>
-            <textarea rows="7" cols="70" name="profil_recherche"></textarea>
+            <textarea rows="7" cols="70" name="profil_recherche" required></textarea>
           </td>
         </tr>
         <tr>
@@ -112,6 +112,9 @@ private int [] parseStringArrayToIntArray(String [] strings) {
 	Entreprise e = (Entreprise) session.getAttribute("utilisateur");
 	IServiceOffreEmploi serviceOffre = (IServiceOffreEmploi) ServicesLocator.getInstance().getRemoteInterface("ServiceOffreEmploi");
  	Offreemploi offre = serviceOffre.newOffreEmploi(e.getId(), titre, descriptif, profil, nivId, secteurIds, new Date() );
+ 	
+ 	for (int i : secteurIds)
+ 		serviceIndexation.indexerOffre(offre, i);
 
       %>
       <h2>Nouvelle offre référencée :</h2>

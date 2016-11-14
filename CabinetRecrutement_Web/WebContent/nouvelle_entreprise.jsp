@@ -18,19 +18,19 @@
 	  	  <tr>
           <th style="width: 170px;">Nom :</th>
 	        <td>
-	          <input type="text" name="nom" size="20" maxlength="50">
+	          <input type="text" name="nom" size="20" maxlength="50" required>
 	        </td>
 	  	  </tr>
 	      <tr>
           <th>Descriptif :</th>
 	        <td>
-	          <textarea rows="7" cols="70" name="descriptif"></textarea>
+	          <textarea rows="7" cols="70" name="descriptif" required></textarea>
 	        </td>
 	      </tr>
 	      <tr>
           <th>Adresse postale (ville) :</th>
 	        <td>
-	          <input type="text" name="adresse_postale" size="20" maxlength="30">
+	          <input type="text" name="adresse_postale" size="20" maxlength="30" required>
 	        </td>
 	      </tr>
 	  	</table>

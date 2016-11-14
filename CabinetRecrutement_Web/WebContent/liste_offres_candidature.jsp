@@ -1,6 +1,3 @@
-<%@page import="eu.telecom_bretagne.cabinet_recrutement.data.model.Niveauqualification"%>
-<%@page import="eu.telecom_bretagne.cabinet_recrutement.data.model.Offreemploi"%>
-<%@page import="eu.telecom_bretagne.cabinet_recrutement.service.IServiceOffreEmploi"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -10,6 +7,7 @@
                 eu.telecom_bretagne.cabinet_recrutement.data.model.Offreemploi,
                 eu.telecom_bretagne.cabinet_recrutement.data.model.Candidature,
                 eu.telecom_bretagne.cabinet_recrutement.data.model.Secteuractivite,
+                eu.telecom_bretagne.cabinet_recrutement.data.model.Niveauqualification,
                 java.util.List"%>
 <%
 	// Récupération du paramètre (id) passé par l'URL : http://localhost:8080/infos_entreprises.jsp?id=1

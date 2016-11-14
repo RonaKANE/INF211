@@ -16,6 +16,8 @@ public interface IServiceCandidature {
 			
 			public Candidature getCandidature(int id);
 
+			public List<Candidature> candidaturesByOffre(int id);
+
 			//Mettre à jour
 			
 			//Supprimmer

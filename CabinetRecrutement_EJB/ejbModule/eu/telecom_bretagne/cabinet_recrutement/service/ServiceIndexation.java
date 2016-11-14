@@ -8,7 +8,9 @@ import javax.ejb.Stateless;
 
 import eu.telecom_bretagne.cabinet_recrutement.data.dao.NiveauQualificationDAO;
 import eu.telecom_bretagne.cabinet_recrutement.data.dao.SecteuractiviteDAO;
+import eu.telecom_bretagne.cabinet_recrutement.data.model.Candidature;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Niveauqualification;
+import eu.telecom_bretagne.cabinet_recrutement.data.model.Offreemploi;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Secteuractivite;
 
 /**
@@ -39,4 +41,18 @@ public class ServiceIndexation implements IServiceIndexation {
 	public List<Niveauqualification> niveauQualificationList() {
 		return niveauQualificationDAO.findAll();
 	}
+
+	@Override
+	public void indexerCandidat(Candidature candidat, int secteurId) {
+		Secteuractivite s = secteuractiviteDAO.findById(secteurId);
+		s.getCandidatures().add(candidat);
+	}
+
+	@Override
+	public void indexerOffre(Offreemploi oe, int secteurId) {
+		Secteuractivite s = secteuractiviteDAO.findById(secteurId);
+		s.getOffreemplois().add(oe);
+	}
+	
+	
 }

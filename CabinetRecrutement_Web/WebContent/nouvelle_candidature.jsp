@@ -1,16 +1,6 @@
-<%@page import="java.lang.reflect.Array"%>
-<%@page import="com.sun.el.stream.Stream"%>
+
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page
-	import="eu.telecom_bretagne.cabinet_recrutement.data.model.Secteuractivite"%>
-<%@page
-	import="eu.telecom_bretagne.cabinet_recrutement.data.model.Niveauqualification"%>
-<%@page
-	import="eu.telecom_bretagne.cabinet_recrutement.service.ServiceIndexation"%>
-<%@page
-	import="eu.telecom_bretagne.cabinet_recrutement.service.ServiceCandidature"%>
-<%@page
-	import="eu.telecom_bretagne.cabinet_recrutement.service.IServiceCandidature"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -18,6 +8,7 @@
 	import="eu.telecom_bretagne.cabinet_recrutement.front.utils.ServicesLocator,
                 eu.telecom_bretagne.cabinet_recrutement.front.utils.Utils,
                 eu.telecom_bretagne.cabinet_recrutement.service.IServiceIndexation,
+                eu.telecom_bretagne.cabinet_recrutement.service.IServiceCandidature,
                 eu.telecom_bretagne.cabinet_recrutement.data.model.Candidature,
                 eu.telecom_bretagne.cabinet_recrutement.data.model.Niveauqualification,
                 eu.telecom_bretagne.cabinet_recrutement.data.model.Secteuractivite,
@@ -59,33 +50,33 @@ if(nom == null) // Pas de paramétre "nom" => affichage du formulaire
 			<tbody>
 				<tr>
 					<th style="width: 170px">Nom :</th>
-					<td><input name="nom" size="20" maxlength="50" type="text">
+					<td><input name="nom" size="20" maxlength="50" type="text" required>
 					</td>
 				</tr>
 				<tr>
 					<th>Prénom :</th>
-					<td><input name="prenom" size="20" maxlength="50" type="text">
+					<td><input name="prenom" size="20" maxlength="50" type="text" required>
 					</td>
 				</tr>
 				<tr>
 					<th>Date de naissance<br>(format jj/mm/aaaa) :
 					</th>
 					<td><input name="date_naissance" size="10" maxlength="10"
-						type="text"></td>
+						type="text" required></td>
 				</tr>
 				<tr>
 					<th>Adresse postale (ville) :</th>
 					<td><input name="adresse_postale" size="20" maxlength="30"
-						type="text"></td>
+						type="text" required></td>
 				</tr>
 				<tr>
 					<th>Adresse email :</th>
 					<td><input name="adresse_email" size="30" maxlength="100"
-						type="text"></td>
+						type="email" required></td>
 				</tr>
 				<tr>
 					<th>Curriculum vitæ :</th>
-					<td><textarea rows="7" cols="70" name="cv"></textarea></td>
+					<td><textarea rows="7" cols="70" name="cv" required></textarea></td>
 				</tr>
 				<tr>
 					<th>Niveau de qualification :</th>
@@ -95,7 +86,7 @@ if(nom == null) // Pas de paramétre "nom" => affichage du formulaire
 								<tr>
 									<% for (Niveauqualification niv : serviceIndexation.niveauQualificationList()) { 
  									%><td><input name="niveau" value="<%=niv.getId() %>"
-										type="radio"><%=niv.getIntitule() %><br>
+										type="radio" required><%=niv.getIntitule() %><br>
 										<% 
  								}
  								%></td>
@@ -113,7 +104,7 @@ if(nom == null) // Pas de paramétre "nom" => affichage du formulaire
 
 									<% for (Secteuractivite sec : serviceIndexation.secteursActiviteList()) { 
  									%><td><input name="secteur" value="<%=sec.getId() %>"
-										type="checkbox"><%=sec.getIntitule() %><br>
+										type="checkbox" ><%=sec.getIntitule() %><br>
 										<% 
  								}
  								%>
@@ -158,6 +149,77 @@ else {
 	  
       IServiceCandidature serviceCandidature = (IServiceCandidature) ServicesLocator.getInstance().getRemoteInterface("ServiceCandidature");
       Candidature candidature = serviceCandidature.newCandidature(nom, prenom, date, adressePostale, mail, new Date(), CV, secteur, niveau);
+      
+      for (int i : secteur)
+      	serviceIndexation.indexerCandidat(candidature, i);
+      %>
+       <table id="affichage">
+		      <tr>
+		        <th style="width: 170px;">Identifiant :</th>
+		        <td>
+		          CAND_<%=candidature.getId()%>
+		        </td>
+		      </tr>
+		      <tr>
+		        <th>Nom :</th>
+		        <td>
+		          <%=candidature.getNom()%>
+		        </td>
+		      </tr>
+		      <tr>
+		        <th>Prénom :</th>
+		        <td>
+		          <%=candidature.getPrenom()%>
+		        </td>
+		      </tr>
+		      <tr>
+		        <th>Date de naissance :</th>
+		        <td>
+		          <%=candidature.getDatenaissance()%>
+		        </td>
+		      </tr>
+		       <tr>
+		        <th>Adresse Postale :</th>
+		        <td>
+		          <%=candidature.getAdressePostale()%>
+		        </td>
+		      </tr>
+		       <tr>
+		        <th>Adresse mail :</th>
+		        <td>
+		          <%=candidature.getAdresseemail()%>
+		        </td>
+		      </tr>
+		      <tr>
+		        <th>CV :</th>
+		        <td>
+		          <%=candidature.getCv()%>
+		        </td>
+		      </tr>
+		          <tr>
+		        <th>Niveau de qualification :</th>
+		        <td>
+		          <%=candidature.getNiveauqualification().getIntitule()%>
+		        </td>
+		      </tr>
+		       <tr>
+		        <th>Secteurs d'activité :</th>
+		        <td>
+		          <% for (Secteuractivite s : candidature.getSecteuractivites())
+		        { %>
+		          <%= s.getIntitule()%> <br>
+		          <%} %>
+		        </td>
+		      </tr>
+		       <tr>
+		        <th>Date dépôt :</th>
+		        <td>
+		          <%=candidature.getDatedepot()%>
+		        </td>
+		      </tr>
+		    </table>
+      <%
+  	
   	}
 
 }
