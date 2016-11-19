@@ -123,4 +123,11 @@ public class ServiceOffreEmploi implements IServiceOffreEmploi {
 		return niveauQualificationDAO.findById(id);
 	}
 
+	@Override
+	public void removeOffreEmploi(int id) {
+		Offreemploi oe = offreEmploiDAO.findById(id);
+		if (oe!=null)
+			offreEmploiDAO.remove(oe);
+	}
+
 }

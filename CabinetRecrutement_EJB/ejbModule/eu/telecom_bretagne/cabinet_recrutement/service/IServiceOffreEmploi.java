@@ -23,5 +23,5 @@ public interface IServiceOffreEmploi {
 		
 		//Mettre à jour
 		
-		//Supprimmer
+		public void removeOffreEmploi(int id);
 }

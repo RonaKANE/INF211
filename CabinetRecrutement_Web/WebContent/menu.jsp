@@ -59,14 +59,14 @@
       	Entreprise e = (Entreprise) utilisateur;
         %>
         <h2>Menu entreprise</h2>
-	      <ul>
-<%--           <li class="menu"><a href="template.jsp?action=maj_entreprise&id_entreprise=<%=e.getId()%>">Mettre à jour les informations de l'entreprise</a></li> --%>
+	    <ul>
+           <li class="menu"><a href="template.jsp?action=maj_entreprise&id_entreprise=<%=e.getId()%>">Mettre à jour les informations de l'entreprise</a></li> 
            <li class="menu"><a href="template.jsp?action=nouvelle_offre">Nouvelle offre d'emploi</a></li>
-	        <li class="menu"><a href="template.jsp?action=liste_offres_entreprise&id=<%=e.getId()%>">Liste de mes offres d'emploi</a></li>
+	       <li class="menu"><a href="template.jsp?action=liste_offres_entreprise&id=<%=e.getId()%>">Liste de mes offres d'emploi</a></li>
         </ul>
-<!--         <ul> -->
-<%-- 	           <li style="list-style-image: url(images/effacement.png)" class="menu"><a href="template.jsp?action=efface_entreprise&id_entreprise=<%=e.getId()%>" onclick="return confirm('Êtes-vous sûr de vouloir retirer votre entreprise et toutes vos offres d\'emploi?\n\nAttention, cette opération n\'est pas réversible !\n\n');">Retirer mon entreprise et toutes mes offres d'emploi</a></li> --%> 
-<!--         </ul> -->
+        <ul>
+ 	           <li style="list-style-image: url(images/effacement.png)" class="menu"><a href="template.jsp?action=efface_entreprise&id_entreprise=<%=e.getId()%>" onclick="return confirm('Êtes-vous sûr de vouloir retirer votre entreprise et toutes vos offres d\'emploi?\n\nAttention, cette opération n\'est pas réversible !\n\n');">Retirer mon entreprise et toutes mes offres d'emploi</a></li> 
+      	</ul>
 <!-- 	      <hr/> -->
 <!-- 	      <h2>Menu messages</h2> -->
 <!-- 	      <ul> -->
