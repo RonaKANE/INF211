@@ -50,7 +50,7 @@
 		      <tr>
 		        <th style="width: 170px;">Identifiant :</th>
 		        <td>
-		          CAN_D<%=c.getId()%>
+		          CAND_<%=c.getId()%>
 		        </td>
 		      </tr>
 		      <tr>

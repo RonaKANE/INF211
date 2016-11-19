@@ -28,6 +28,7 @@
 <body>
 
 <h2>Liste des offres d'emploi référencées :</h2>
+<a href="cabinet_recrutement_offres_rss.jsp"> <img alt="RSS" src="images/icone_rss.png"> </a>
 
 		<table id="affichage">
 		<tr>
@@ -63,6 +64,7 @@
 		  }
 		  %>
 		</table>
+
 
     <a href="template.jsp">Retour au menu</a>
 

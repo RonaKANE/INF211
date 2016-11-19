@@ -27,6 +27,7 @@
 <body>
 
 <h2>Liste des Candidatures référencées :</h2>
+<a href="cabinet_recrutement_candidatures_rss.jsp"> <img alt="RSS" src="images/icone_rss.png"> </a>
 
 		<table id="affichage">
 		<tr>
