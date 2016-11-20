@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import eu.telecom_bretagne.cabinet_recrutement.data.model.Offreemploi;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Secteuractivite;
 
 /**
@@ -69,10 +70,14 @@ public class SecteuractiviteDAO {
 			e.printStackTrace();
 			return null;
 		}
-	  
-	  //return Secteuractivite;
+
   }
-  
+
+  public Secteuractivite findbyOffre(Offreemploi oe){
+	  
+	  
+	  return null;
+  }
   
   
 }

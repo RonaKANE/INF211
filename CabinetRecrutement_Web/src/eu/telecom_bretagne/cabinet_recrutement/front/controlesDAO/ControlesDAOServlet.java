@@ -12,11 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import eu.telecom_bretagne.cabinet_recrutement.data.dao.CandidatureDAO;
 import eu.telecom_bretagne.cabinet_recrutement.data.dao.EntrepriseDAO;
+import eu.telecom_bretagne.cabinet_recrutement.data.dao.MessageCandidatureDAO;
+import eu.telecom_bretagne.cabinet_recrutement.data.dao.MessageOffreEmploiDAO;
 import eu.telecom_bretagne.cabinet_recrutement.data.dao.NiveauQualificationDAO;
 import eu.telecom_bretagne.cabinet_recrutement.data.dao.OffreEmploiDAO;
 import eu.telecom_bretagne.cabinet_recrutement.data.dao.SecteuractiviteDAO;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Candidature;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Entreprise;
+import eu.telecom_bretagne.cabinet_recrutement.data.model.Messagecandidature;
+import eu.telecom_bretagne.cabinet_recrutement.data.model.Messageoffredemploi;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Niveauqualification;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Offreemploi;
 import eu.telecom_bretagne.cabinet_recrutement.data.model.Secteuractivite;
@@ -54,6 +58,8 @@ public class ControlesDAOServlet extends HttpServlet
 		OffreEmploiDAO offreEmploiDAO = null;
 		NiveauQualificationDAO niveauqualificationDAO = null;
 		SecteuractiviteDAO secteuractiviteDAO = null;
+		MessageOffreEmploiDAO messageOffreEmploiDAO = null;
+		MessageCandidatureDAO messageCandidatureDAO = null;
     try
     {
 	    entrepriseDAO = (EntrepriseDAO) ServicesLocator.getInstance().getRemoteInterface("EntrepriseDAO");  
@@ -61,6 +67,8 @@ public class ControlesDAOServlet extends HttpServlet
 	    offreEmploiDAO = (OffreEmploiDAO) ServicesLocator.getInstance().getRemoteInterface("OffreEmploiDAO");
 	    niveauqualificationDAO = (NiveauQualificationDAO) ServicesLocator.getInstance().getRemoteInterface("NiveauQualificationDAO");
 	    secteuractiviteDAO = (SecteuractiviteDAO) ServicesLocator.getInstance().getRemoteInterface("SecteuractiviteDAO");	
+	    messageOffreEmploiDAO = (MessageOffreEmploiDAO) ServicesLocator.getInstance().getRemoteInterface("MessageOffreEmploiDAO");
+	    messageCandidatureDAO= (MessageCandidatureDAO) ServicesLocator.getInstance().getRemoteInterface("MessageCandidatureDAO");
     }
     catch (ServicesLocatorException e)
     {
@@ -279,6 +287,22 @@ public class ControlesDAOServlet extends HttpServlet
 		out.println(sec.getIntitule());
 		out.println();
 		
+		// Contrôle(s) de fonctionnalités de MessageOffreEmploiDAO.
+		out.println("Liste des :");
+		List<Messageoffredemploi> messageoffredemplois = messageOffreEmploiDAO.findByOffre(3);
+		for(Messageoffredemploi m : messageoffredemplois)
+		{
+			out.println(m.getId());
+		}
+		
+		// Contrôle(s) de fonctionnalités de MessageCandidatureDAO.
+		out.println("Liste des :");
+		List<Messagecandidature> messagecandidatures = messageCandidatureDAO.findByOffre(3);
+		for(Messagecandidature m : messagecandidatures)
+		{
+			out.println(m.getId());
+		}		
 	}
 	//-----------------------------------------------------------------------------
+
 }

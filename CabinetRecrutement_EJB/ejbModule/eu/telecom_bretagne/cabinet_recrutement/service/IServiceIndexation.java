@@ -19,5 +19,7 @@ public interface IServiceIndexation {
 	public void indexerCandidat(Candidature Candidat, int secteurId);
 	
 	public void indexerOffre(Offreemploi oe, int secteurId);
+	
+	public void retirerOffre(int id);
 }
 

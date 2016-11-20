@@ -64,6 +64,12 @@ public class ServicesLocator {
 		else if (nomEJB.equals("ServiceIndexation"))
 			nomJNDI = "java:global/CabinetRecrutement/CabinetRecrutement_EJB/ServiceIndexation!eu.telecom_bretagne.cabinet_recrutement.service.IServiceIndexation";
 			
+		else if (nomEJB.equals("ServiceMessageOffreEmploi"))
+			nomJNDI = "java:global/CabinetRecrutement/CabinetRecrutement_EJB/ServiceMessageOffreEmploi!eu.telecom_bretagne.cabinet_recrutement.service.IServiceMessageOffreEmploi";
+				
+		else if (nomEJB.equals("ServiceMessageCandidature"))
+			nomJNDI = "java:global/CabinetRecrutement/CabinetRecrutement_EJB/ServiceMessageCandidature!eu.telecom_bretagne.cabinet_recrutement.service.IServiceMessageCandidature";
+		
 		
 		// ATTENTION !!! La récupération d'un DAO n'existe ici que
 		// pour les contrôles (utilisés dans la servlet ControleDAOServlet) :
@@ -82,6 +88,13 @@ public class ServicesLocator {
 
 		else if (nomEJB.equals("EntrepriseDAO"))
 			nomJNDI = "java:global/CabinetRecrutement/CabinetRecrutement_EJB/EntrepriseDAO!eu.telecom_bretagne.cabinet_recrutement.data.dao.EntrepriseDAO";
+		
+		else if (nomEJB.equals("MessageOffreEmploiDAO"))
+			nomJNDI = "java:global/CabinetRecrutement/CabinetRecrutement_EJB/MessageOffreEmploiDAO!eu.telecom_bretagne.cabinet_recrutement.data.dao.MessageOffreEmploiDAO";
+		
+		else if (nomEJB.equals("MessageCandidatureDAO"))
+			nomJNDI = "java:global/CabinetRecrutement/CabinetRecrutement_EJB/MessageCandidatureDAO!eu.telecom_bretagne.cabinet_recrutement.data.dao.MessageCandidatureDAO";
+		
 
 		else if (nomEJB.equals("IServiceRemoteBean"))
 			nomJNDI = " java:global/CabinetRecrutement/CabinetRecrutement_EJB/ServiceRemoteBean!eu.telecom_bretagne.cabinet_recrutement.service.IServiceRemoteBean";

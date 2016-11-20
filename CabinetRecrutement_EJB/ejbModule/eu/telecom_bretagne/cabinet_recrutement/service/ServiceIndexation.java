@@ -53,6 +53,19 @@ public class ServiceIndexation implements IServiceIndexation {
 		Secteuractivite s = secteuractiviteDAO.findById(secteurId);
 		s.getOffreemplois().add(oe);
 	}
+
+	@Override
+	public void retirerOffre(int id) {
+		Offreemploi oeToRemove = null;
+		List <Secteuractivite> secteurs = secteuractiviteDAO.findAll();
+		for (Secteuractivite s : secteurs) {
+			for (Offreemploi oe : s.getOffreemplois()) {
+				if (oe.getId() == id) oeToRemove = oe;
+			}
+			s.getOffreemplois().remove(oeToRemove);
+				
+		}
+	}
 	
 	
 }
